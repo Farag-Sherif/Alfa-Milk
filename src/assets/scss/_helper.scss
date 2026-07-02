@@ -1,0 +1,100 @@
+@import "variables";
+
+/*=============================================
+=            Helper CSS            =
+=============================================*/
+
+@for $i from 0 through 15 {
+  .row-#{1 * $i} {
+    margin-inline-start: -1px * $i;
+    margin-inline-end: -1px * $i;
+
+    & > [class*="col"] {
+      padding-inline-start: 1px * $i;
+      padding-inline-end: 1px * $i;
+    }
+  }
+}
+@for $i from 16 through 80 {
+  .row-#{1 * $i} {
+    margin-inline-start: -1px * $i;
+    margin-inline-end: -1px * $i;
+
+    // Responsive
+    @media #{$xl-layout} {
+      margin-inline-start: -15px;
+      margin-inline-end: -15px;
+    }
+    @media #{$lg-layout} {
+      margin-inline-start: -15px;
+      margin-inline-end: -15px;
+    }
+    @media #{$md-layout} {
+      margin-inline-start: -15px;
+      margin-inline-end: -15px;
+    }
+    @media #{$xs-layout} {
+      margin-inline-start: -15px;
+      margin-inline-end: -15px;
+    }
+
+    & > [class*="col"] {
+      padding-inline-start: 1px * $i;
+      padding-inline-end: 1px * $i;
+
+      // Responsive
+      @media #{$xl-layout} {
+        padding-inline-start: 15px;
+        padding-inline-end: 15px;
+      }
+      @media #{$lg-layout} {
+        padding-inline-start: 15px;
+        padding-inline-end: 15px;
+      }
+      @media #{$md-layout} {
+        padding-inline-start: 15px;
+        padding-inline-end: 15px;
+      }
+      @media #{$xs-layout} {
+        padding-inline-start: 15px;
+        padding-inline-end: 15px;
+      }
+    }
+  }
+}
+
+/* no gutters */
+.no-gutters {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  & > .col,
+  & > [class*="col-"] {
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+    margin: 0;
+  }
+}
+
+/*=====  End of Helper CSS  ======*/
+.error {
+  color: red;
+  padding-block: 10px;
+}
+
+.order-now {
+  background: rgb(0, 131, 66);
+  color: rgb(255, 255, 255);
+  border: 0px solid rgb(0, 0, 0);
+  font-size: 16px;
+  display: flex;
+  padding: 20px 50px;
+  text-align: center;
+  cursor: pointer;
+  gap: 15px;
+  width: fit-content;
+  transition: all 0.3s;
+}
+
+// .order-now:hover {
+//   background-color: #77543A;
+// }

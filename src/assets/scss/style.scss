@@ -1,0 +1,47 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~swiper/css/swiper.css";
+@import "~animate.css/animate.min.css";
+@import "~lightgallery.js/dist/css/lightgallery.css";
+@import "~react-modal-video/scss/modal-video.scss";
+@import "../css/icons.min.css";
+
+@import "variables";
+@import "helper";
+@import "common";
+@import "preloader";
+@import "header";
+@import "slider";
+@import "support";
+@import "section-title";
+@import "product";
+@import "blog";
+@import "footer";
+@import "banner";
+@import "suscribe";
+@import "about";
+@import "image-slider";
+@import "testimonial";
+@import "brand-logo";
+@import "timers";
+@import "breadcrumb";
+@import "sidebar";
+@import "shop";
+@import "product-details";
+@import "cart";
+@import "compare";
+@import "checkout";
+@import "contact";
+@import "blog-details";
+@import "login-register";
+@import "my-account";
+@import "404";
+@import "video-popup";
+
+body, 
+p, h1, h2, h3, h4, h5, h6, 
+span, a, label, li, button, input, textarea {
+    font-weight: bold !important;
+}
+body{
+    font-family: 'Cairo' , sans-serif !important;
+}
