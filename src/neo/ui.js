@@ -10,7 +10,6 @@ import {
   StarRow,
   calculateCartTotal,
   categoryName,
-  createCartItemFromProduct,
   formatCurrency,
   formatWeight,
   getBasePrice,
