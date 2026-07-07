@@ -545,9 +545,9 @@ export const HeroPanel = ({ settings, banners = [] }) => {
     return (
       <section style={{ position: 'relative', width: '100%', height: 'clamp(300px, 50vh, 560px)', borderRadius: '40px', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.1)' }}>
         {banners.map((banner, index) => (
-          <Link key={banner.id || index} to={banner.url ? `/product/${banner.url.split('/').filter(Boolean).pop()}` : '#'} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: index === currentIndex ? 1 : 0, transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: index === currentIndex ? 'auto' : 'none' }}>
+          <div key={banner.id || index} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: index === currentIndex ? 1 : 0, transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: 'none' }}>
             <img src={banner.image_path} alt={banner.title || "Banner"} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          </Link>
+          </div>
         ))}
         {banners.length > 1 && (
           <>

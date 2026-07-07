@@ -24,7 +24,7 @@ const Logo = ({ currentLanguageCode, logoClass }) => {
   // 2) Pick the correct path
   // A) If the image is in PUBLIC folder: public/logo.png
   const logoSrc =`${process.env.PUBLIC_URL || ""}/logo.png`
-     
+     console.log(`${process.env.PUBLIC_URL || ""}/logo.png`);
 
   // B) If you actually need language-specific SVGs, rename files to avoid spaces:
   // const logoSrc = `${process.env.PUBLIC_URL || ""}/${
@@ -35,9 +35,8 @@ const Logo = ({ currentLanguageCode, logoClass }) => {
     <div className={`${logoClass || ""} mt-0`}>
       <Link to={`${process.env.PUBLIC_URL || ""}/`}>
         <img
-          src={logoSrc}
+          src={`${process.env.PUBLIC_URL || ""}/logo.png`}
           alt="Logo"
-          
           style={{
             // objectFit: "cover",
             // Don’t use "!important" in inline styles; it’s ignored.

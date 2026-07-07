@@ -61,6 +61,7 @@ const usePublicBootstrap = () => {
       axiosInstance.get("/offers-banner")
     ]).then(([settingsRes, cafesRes, itemsRes, offersRes, blogsRes, featuresRes, faqsRes, bannersRes]) => {
       if (!active) return;
+      console.log("Categories response:", cafesRes.data);
       setData({
         settings: settingsRes.data?.settings || null,
         categories: cafesRes.data || [],
