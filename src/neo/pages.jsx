@@ -55,7 +55,7 @@ const usePublicBootstrap = () => {
       axiosInstance.get("/cafes"),
       axiosInstance.get("/items"),
       axiosInstance.get("/offers"),
-      axios.get("https://admin.omdacoffee.com/api/blogs"),
+      axios.get("https://alfamilk.test.do-go.net/api/blogs"),
       axiosInstance.get("/features"),
       axiosInstance.get("/faqs"),
       axiosInstance.get("/offers-banner")
@@ -399,7 +399,7 @@ export const BlogPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get("https://admin.omdacoffee.com/api/blogs").then((res) => setPosts(res.data || [])).finally(() => setLoading(false));
+    axios.get("https://alfamilk.test.do-go.net/api/blogs").then((res) => setPosts(res.data || [])).finally(() => setLoading(false));
   }, []);
   return <Shell><div className="ng-page"><SectionHeader eyebrow={isArabic(lang) ? "المدونة" : "Blog"} title={t(lang, "navStories")} text={t(lang, "latestStories")} />{loading ? <LoadingScreen /> : <div className="ng-blog-grid">{posts.map((post) => <BlogCard key={post.id} post={post} />)}</div>}</div></Shell>;
 };
@@ -414,7 +414,7 @@ export const BlogDetailPage = () => {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    axios.get(`https://admin.omdacoffee.com/api/blog/${id}`).then((res) => setPost(res.data?.item || res.data?.post || res.data?.item || res.data)).finally(() => setLoading(false));
+    axios.get(`https://alfamilk.test.do-go.net/api/blog/${id}`).then((res) => setPost(res.data?.item || res.data?.post || res.data?.item || res.data)).finally(() => setLoading(false));
   }, [id]);
   const title = pickTranslation(post?.translations, lang, "title") || post?.title;
   const html = pickTranslation(post?.translations, lang, "content") || post?.content || "";
@@ -523,7 +523,7 @@ export const ContactPage = () => {
               <p>{meta.address}</p>
               <p>{meta.email}</p>
               {meta.mobiles.map((mobile) => <p key={mobile.id}>{mobile.mobile}</p>)}
-              <div className="ng-social-row">{meta.socials.map((social) => <a key={social.id} href={social.url} target="_blank" rel="noreferrer"><img src={`https://admin.omdacoffee.com/images/${social.icon}`} alt="social" /></a>)}</div>
+              <div className="ng-social-row">{meta.socials.map((social) => <a key={social.id} href={social.url} target="_blank" rel="noreferrer"><img src={`https://alfamilk.test.do-go.net/images/${social.icon}`} alt="social" /></a>)}</div>
             </div>
             <form className="ng-contact-form" onSubmit={handleSubmit}>
               <input value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} placeholder={t(lang, "firstName")} />

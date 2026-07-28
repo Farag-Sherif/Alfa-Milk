@@ -26,7 +26,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
 
   const userImage =
     userData?.image && userData.image !== "user.png"
-      ? `https://admin.omdacoffee.com/images/${userData.image}`
+      ? `https://alfamilk.test.do-go.net/images/${userData.image}`
       : defaultImg;
 
   const productImage = data.item?.image_path || null;

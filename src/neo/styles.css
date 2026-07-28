@@ -15,6 +15,14 @@
   --ng-shadow-hover: 0 24px 48px rgba(26, 60, 107, 0.12);
 }
 
+/* Global RTL Enforcement */
+html[dir="rtl"], 
+html[dir="rtl"] body, 
+.ng-app.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
 * { box-sizing: border-box; }
 html, body, #root { min-height: 100%; }
 body {

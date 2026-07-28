@@ -70,7 +70,7 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, strings }) => {
               <div className="fruits-deal-img">
                 <Link to={`product/${offer?.url.split("/")[offer?.url.split("/").length - 1]}/`}>
                   <img
-                    src={`https://admin.omdacoffee.com/images/${offer?.image}`}
+                    src={`https://alfamilk.test.do-go.net/images/${offer?.image}`}
                     alt="deal of day"
                     loading="lazy"
                   />

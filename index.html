@@ -81,10 +81,15 @@
             const settings = JSON.parse(local);
             const language = settings.multilanguage.currentLanguageCode;
             document.documentElement.setAttribute("lang", language);
-            // document.documentElement.setAttribute(
-            //   "dir",
-            //   language === "en" ? "ltr" : "rtl"
-            // );
+            document.documentElement.setAttribute(
+              "dir",
+              language === "en" ? "ltr" : "rtl"
+            );
+            if (language !== "en") {
+              document.documentElement.classList.add("rtl");
+            } else {
+              document.documentElement.classList.remove("rtl");
+            }
           }
         } catch (e) {
           console.error("Error setting language:", e);

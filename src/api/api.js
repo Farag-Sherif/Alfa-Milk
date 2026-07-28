@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: "https://admin.omdacoffee.com/api", // Replace with your API base URL
+  baseURL: "https://alfamilk.test.do-go.net/api", // Replace with your API base URL
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",

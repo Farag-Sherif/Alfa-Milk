@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://admin.elmodafoods.com', // جرّب https أولاً
+      target: 'https://alfamilk.test.do-go.net', // جرّب https أولاً
       changeOrigin: true,
       secure: false,          // لو شهادة الـSSL مش كاملة/Self-signed
       logLevel: 'silent',

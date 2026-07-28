@@ -19,7 +19,7 @@ const BlogFeaturedThree = ({ spaceTopClass, spaceBottomClass, strings, currentLa
       const fetchItems = async () => {
         setIsLoading(true);
         try {
-          const response = await axios.get("https://admin.omdacoffee.com/api/blogs");
+          const response = await axios.get("https://alfamilk.test.do-go.net/api/blogs");
           console.log(response);
           
           const data = response.data.slice(0, 3);

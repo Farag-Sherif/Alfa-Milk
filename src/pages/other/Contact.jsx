@@ -165,7 +165,7 @@ const Contact = ({ strings, currentLanguageCode }) => {
                             rel="noopener noreferrer"
                           >
                             <img
-                              src={`https://admin.omdacoffee.com/images/${el.icon}`}
+                              src={`https://alfamilk.test.do-go.net/images/${el.icon}`}
                               alt={`Social media icon ${index + 1}`}
                               className="social-media-icon"
                               style={{

@@ -181,7 +181,7 @@ const ProductDescriptionInfo = ({
           {icons?.map((icon, index) => (
             <div key={index} className="text-center mx-2">
               <img
-                src={`https://admin.omdacoffee.com/ar/images/${icon?.icon}`}
+                src={`https://alfamilk.test.do-go.net/ar/images/${icon?.icon}`}
                 className="img-fluid"
                 width={50}
                 height={50}

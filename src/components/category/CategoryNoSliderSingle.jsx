@@ -38,7 +38,7 @@ const CategoryNoSliderSingle = ({
             e.currentTarget.style.transform = "scale(1)";
           }}>
           <img
-            src={`https://admin.omdacoffee.com/en/images/${data.logo}`}
+            src={`https://alfamilk.test.do-go.net/en/images/${data.logo}`}
             alt={data.name}
             style={{
               width: "180px",

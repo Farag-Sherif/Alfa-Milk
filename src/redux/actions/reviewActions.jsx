@@ -87,7 +87,7 @@ export const submitReview =
     formData.append("order_id", reviewData.order_id);
 
     const res = await axios.post(
-      "https://admin.omdacoffee.com/api/review-item",
+      "https://alfamilk.test.do-go.net/api/review-item",
       formData,
       {
         headers: {

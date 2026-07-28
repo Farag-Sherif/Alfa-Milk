@@ -9,7 +9,7 @@ Al Omda Coffee is an e-commerce platform that allows customers to browse a catal
 ## ✨ Key Features
 
 - **Bilingual & RTL Support**: Full support for both Arabic (Default, Right-to-Left) and English (Left-to-Right). The UI seamlessly adapts its layout and typography based on the selected language.
-- **Dynamic Content**: Integrates with the Al Omda backend API (`https://admin.omdacoffee.com/api/`) to fetch dynamic settings, categories, products, offers, and blog posts.
+- **Dynamic Content**: Integrates with the Al Omda backend API (`https://alfamilk.test.do-go.net/api/`) to fetch dynamic settings, categories, products, offers, and blog posts.
 - **Product Catalog & Cart**: Browse products, view detailed descriptions, select weight variations, and add items to a Redux-managed shopping cart or wishlist.
 - **Responsive Design**: A robust mobile-first layout featuring a mobile bottom navigation bar and a sticky top bar.
 - **Custom Neo UI System**: Built with a custom, lightweight, and modern UI system (`src/neo/ui.js` and `src/neo/styles.css`) focusing on performance, glassmorphism, and smooth animations.

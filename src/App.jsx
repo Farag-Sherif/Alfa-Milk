@@ -29,10 +29,22 @@ const ScrollToTop = () => {
   return null;
 };
 
-const App = ({ dispatch }) => {
+const App = ({ dispatch, currentLanguageCode }) => {
   useEffect(() => {
     dispatch(loadLanguages({ languages: { ar: {}, en: {} } }));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (currentLanguageCode) {
+      const isRtl = currentLanguageCode !== "en";
+      document.documentElement.setAttribute("dir", isRtl ? "rtl" : "ltr");
+      if (isRtl) {
+        document.documentElement.classList.add("rtl");
+      } else {
+        document.documentElement.classList.remove("rtl");
+      }
+    }
+  }, [currentLanguageCode]);
 
   return (
     <ToastProvider placement="top-right" autoDismiss autoDismissTimeout={3500}>
@@ -62,4 +74,12 @@ const App = ({ dispatch }) => {
   );
 };
 
-export default connect()(App);
+const mapStateToProps = (state) => {
+  return {
+    currentLanguageCode: state.multilanguage
+      ? state.multilanguage.currentLanguageCode
+      : "ar",
+  };
+};
+
+export default connect(mapStateToProps)(App);

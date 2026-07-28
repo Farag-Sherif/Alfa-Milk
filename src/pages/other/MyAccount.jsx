@@ -338,7 +338,7 @@ console.log(user);
                                               <div className="col-3 col-md-2">
                                                 <img
                                                   width={80}
-                                                  src={`https://admin.omdacoffee.com/en/images/${item.image}`}
+                                                  src={`https://alfamilk.test.do-go.net/en/images/${item.image}`}
                                                   alt={item.name}
                                                   className="img-fluid rounded shadow-sm"
                                                 />

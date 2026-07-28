@@ -10,7 +10,7 @@ const BlogSidebar = ({strings}) => {
     // fetch data from API
     const fetchItems = async () => {
       try {
-        const response = await axios.get("https://admin.omdacoffee.com/api/blogs");
+        const response = await axios.get("https://alfamilk.test.do-go.net/api/blogs");
         const data = response.data.slice(0, 5);
         setBlogFeaturedData(data);
       } catch (error) {
