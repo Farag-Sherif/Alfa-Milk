@@ -125,14 +125,14 @@ export const MobileBottomBar = () => {
       <NavLink to="/cart" className="ng-bottom-item" activeClassName="active">
         <span style={{position:'relative'}}>
           🛒
-          {cartItems.length > 0 && <span className="ng-badge">{cartItems.length}</span>}
+          {cartItems.filter(Boolean).length > 0 && <span className="ng-badge">{cartItems.filter(Boolean).length}</span>}
         </span>
         <small>{t(lang, "navCart")}</small>
       </NavLink>
       <NavLink to="/wishlist" className="ng-bottom-item" activeClassName="active">
         <span style={{position:'relative'}}>
           ♡
-          {wishlistItems.length > 0 && <span className="ng-badge">{wishlistItems.length}</span>}
+          {wishlistItems.filter(p => p && p.id).length > 0 && <span className="ng-badge">{wishlistItems.filter(p => p && p.id).length}</span>}
         </span>
         <small>{isArabic(lang) ? "المفضلة" : "Wishlist"}</small>
       </NavLink>
@@ -144,13 +144,14 @@ export const MobileBottomBar = () => {
   );
 };
 
-export const Shell = ({ children }) => {
+export const Shell = ({ children, isHome = false }) => {
   const lang = useCurrentLanguage();
   const settings = useBranding();
   return (
     <div className={`ng-app ${isArabic(lang) ? "rtl" : "ltr"}`} dir={isArabic(lang) ? "rtl" : "ltr"}>
-      <TopNavigation settings={settings} />
-      <main className="ng-main">{children}</main>
+      <style>{`.ng-app { overflow-x: hidden; }`}</style>
+      <TopNavigation settings={settings} isHome={isHome} />
+      <main className="ng-main" style={isHome ? { paddingTop: 0 } : {}}>{children}</main>
       <Footer settings={settings} />
       <CartDrawer />
       <MobileBottomBar />
@@ -158,7 +159,7 @@ export const Shell = ({ children }) => {
   );
 };
 
-export const TopNavigation = ({ settings }) => {
+export const TopNavigation = ({ settings, isHome = false }) => {
   const lang = useCurrentLanguage();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -181,7 +182,7 @@ export const TopNavigation = ({ settings }) => {
   };
 
   return (
-    <header className="ng-topbar">
+    <header className="ng-topbar" style={isHome ? { position: 'fixed', top: 0, width: '100%', zIndex: 50 } : {}}>
       <div className="ng-topbar-backdrop" />
       <div className="ng-topbar-inner">
         <button className="ng-mobile-menu-btn" onClick={() => setMobileMenuOpen(true)}>☰</button>
@@ -206,8 +207,8 @@ export const TopNavigation = ({ settings }) => {
           <button className="ng-lang-button" onClick={() => dispatch(changeLanguage(isArabic(lang) ? "en" : "ar"))}>
             {t(lang, "language")}
           </button>
-          <Link className="ng-iconlink" to="/wishlist">♡<span>{wishlistItems.length}</span></Link>
-          <Link className="ng-iconlink" to="/cart">🛒<span>{cartItems.length}</span></Link>
+          <Link className="ng-iconlink" to="/wishlist">♡<span>{wishlistItems.filter(p => p && p.id).length}</span></Link>
+          <Link className="ng-iconlink" to="/cart">🛒<span>{cartItems.filter(Boolean).length}</span></Link>
           <Link className="ng-account-pill" to="/my-account">{t(lang, "navAccount")}</Link>
         </div>
       </div>
@@ -258,7 +259,7 @@ export const Footer = ({ settings }) => {
       <div className="ng-footer-grid">
         <div className="ng-footer-brand">
           <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: '24px', textDecoration: 'none' }}>
-            <div style={{ fontSize: '40px', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }}>☕</div>
+            <img src="/15x15.png" alt="Logo" style={{ width: '40px', height: '40px', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }} />
             <h3 style={{ margin: 0, fontSize: '28px' }}>{settings?.title || t(lang, "brandName")}</h3>
           </Link>
           <p>{t(lang, "footerText")}</p>
@@ -461,7 +462,7 @@ export const CartDrawer = () => {
         
         <div className="ng-mini-cart-body">
           <div className="ng-mini-cart-section-title">
-            {t(lang, "navCart")} <span className="badge">{cartItems.length}</span>
+            {t(lang, "navCart")} <span className="badge">{cartItems.filter(Boolean).length}</span>
           </div>
           <div className="ng-mini-cart-items-wrap">
             {cartItems.map(item => <MiniCartItem key={item.cartItemId || item.id} item={item} />)}
@@ -543,7 +544,7 @@ export const HeroPanel = ({ settings, banners = [] }) => {
 
   if (banners && banners.length > 0) {
     return (
-      <section style={{ position: 'relative', width: '100%', height: 'clamp(300px, 50vh, 560px)', borderRadius: '40px', overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.1)' }}>
+      <section style={{ position: 'relative', width: '100vw', margin: '0 calc(50% - 50vw)', height: '95vh', minHeight: '600px', borderRadius: '0', overflow: 'hidden', boxShadow: 'none' }}>
         {banners.map((banner, index) => (
           <div key={banner.id || index} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: index === currentIndex ? 1 : 0, transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: 'none' }}>
             <img src={banner.image_path} alt={banner.title || "Banner"} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -565,16 +566,113 @@ export const HeroPanel = ({ settings, banners = [] }) => {
   return (
     <div className="ng-hero-grid" style={{
       background: "linear-gradient(135deg, #009B4D, #1A3C6B)",
-      borderRadius: "40px",
+      borderRadius: "0",
+      width: "100vw",
+      margin: "0 calc(50% - 50vw)",
+      height: "95vh",
       minHeight: "600px",
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       position: "relative",
       overflow: "hidden"
     }}>
-      <div style={{ padding: "80px" }}>
-        <h1 style={{ color: "#fff", fontSize: "48px" }}>{settings?.title || t(lang, "brandName")}</h1>
+      <div style={{ padding: "80px", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <span style={{ color: "#e0f7e9", fontSize: "18px", fontWeight: "bold", marginBottom: "16px", textTransform: "uppercase", letterSpacing: "1px" }}>
+          {t(lang, "heroEyebrow")}
+        </span>
+        <h1 style={{ color: "#fff", fontSize: "clamp(36px, 5vw, 60px)", fontWeight: "800", marginBottom: "24px", lineHeight: "1.2" }}>
+          {settings?.title || t(lang, "brandName")}
+          <br />
+          <span style={{ color: "#e0f7e9", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: "600", display: "block", marginTop: "8px" }}>
+            {t(lang, "heroTitle")}
+          </span>
+        </h1>
+        <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "18px", lineHeight: "1.8", maxWidth: "500px", marginBottom: "40px" }}>
+          {t(lang, "heroText")}
+        </p>
+        <div>
+          <Link
+            to="/shop"
+            style={{
+              background: "#fff",
+              color: "#1A3C6B",
+              padding: "16px 32px",
+              borderRadius: "24px",
+              fontSize: "18px",
+              fontWeight: "bold",
+              textDecoration: "none",
+              display: "inline-block",
+              boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+              transition: "transform 0.3s ease"
+            }}
+            onMouseOver={(e) => e.currentTarget.style.transform = "translateY(-2px)"}
+            onMouseOut={(e) => e.currentTarget.style.transform = "translateY(0)"}
+          >
+            {t(lang, "primaryCta")}
+          </Link>
+        </div>
       </div>
+      
+      <div style={{ position: "relative", zIndex: 2, display: "flex", justifyContent: "center", alignItems: "center" }} className="ng-hero-graphics d-none d-md-flex">
+        <div style={{
+          width: "450px",
+          height: "450px",
+          backgroundColor: "rgba(255,255,255,0.05)",
+          borderRadius: "50%",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: -1,
+          boxShadow: "0 0 80px rgba(0, 155, 77, 0.4)",
+          border: "1px solid rgba(255,255,255,0.1)"
+        }}></div>
+        <div style={{
+           fontSize: "160px", 
+           textAlign: "center",
+           color: "white",
+           textShadow: "0 20px 40px rgba(0,0,0,0.3)",
+           animation: "float 6s ease-in-out infinite"
+        }}>
+           🥛
+        </div>
+        <style>
+          {`
+            @keyframes float {
+              0% { transform: translateY(0px); }
+              50% { transform: translateY(-20px); }
+              100% { transform: translateY(0px); }
+            }
+            @media (max-width: 768px) {
+              .ng-hero-graphics { display: none !important; }
+              .ng-hero-grid { grid-template-columns: 1fr !important; }
+            }
+          `}
+        </style>
+      </div>
+
+      <div style={{
+        position: "absolute",
+        top: "-10%",
+        right: "-10%",
+        width: "500px",
+        height: "500px",
+        borderRadius: "50%",
+        background: "rgba(0, 155, 77, 0.4)",
+        filter: "blur(80px)",
+        zIndex: 1
+      }}></div>
+      <div style={{
+        position: "absolute",
+        bottom: "-20%",
+        left: "-10%",
+        width: "600px",
+        height: "600px",
+        borderRadius: "50%",
+        background: "rgba(26, 60, 107, 0.6)",
+        filter: "blur(100px)",
+        zIndex: 1
+      }}></div>
     </div>
   );
 };

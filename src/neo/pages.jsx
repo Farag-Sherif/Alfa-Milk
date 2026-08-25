@@ -47,6 +47,14 @@ const usePublicBootstrap = () => {
   const [data, setData] = useState({ settings: null, categories: [], items: [], offers: [], blogs: [], features: [], faqs: [], banners: [] });
   const [loading, setLoading] = useState(true);
 
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobileOrTablet(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     let active = true;
     setLoading(true);
@@ -58,10 +66,9 @@ const usePublicBootstrap = () => {
       axios.get("https://alfamilk.test.do-go.net/api/blogs"),
       axiosInstance.get("/features"),
       axiosInstance.get("/faqs"),
-      axiosInstance.get("/offers-banner")
+      axiosInstance.get(isMobileOrTablet ? "/sliders-phone" : "/sliders-web")
     ]).then(([settingsRes, cafesRes, itemsRes, offersRes, blogsRes, featuresRes, faqsRes, bannersRes]) => {
       if (!active) return;
-      console.log("Categories response:", cafesRes.data);
       setData({
         settings: settingsRes.data?.settings || null,
         categories: cafesRes.data || [],
@@ -70,7 +77,7 @@ const usePublicBootstrap = () => {
         blogs: blogsRes.data || [],
         features: featuresRes.data || [],
         faqs: Array.isArray(faqsRes.data) ? faqsRes.data : (faqsRes.data ? [faqsRes.data] : []),
-        banners: bannersRes.data || []
+        banners: Array.isArray(bannersRes.data) ? bannersRes.data : bannersRes.data?.data || []
       });
     }).catch(() => {
       if (!active) return;
@@ -81,7 +88,7 @@ const usePublicBootstrap = () => {
     return () => {
       active = false;
     };
-  }, []);
+  }, [isMobileOrTablet]);
 
   return { ...data, loading };
 };
@@ -92,7 +99,7 @@ export const HomePage = () => {
   if (loading) return <Shell><LoadingScreen label="Loading homepage" /></Shell>;
 
   return (
-    <Shell>
+    <Shell isHome>
       <div className="ng-page ng-home-page" style={{ display: 'flex', flexDirection: 'column', gap: '80px', paddingBottom: '60px' }}>
         <HeroPanel settings={settings} banners={banners} />
 
@@ -128,7 +135,7 @@ export const HomePage = () => {
         </section>
 
         <section className="ng-surface" style={{ padding: '0', background: 'transparent', border: 'none', boxShadow: 'none' }}>
-          <SectionHeader eyebrow={isArabic(lang) ? "المنتجات" : "Products"} title={t(lang, "featuredProducts")} text={isArabic(lang) ? "في 'العمدة'، نختار حبوبنا بعناية من أفضل المصادر ونحمصها بطريقة تحافظ على نكهتها الأصلية، لنقدم لك كوب قهوة متوازن... من أول رشفة لآخر رشفة." : (settings?.services_meta_description || t(lang, "heroText"))} action={<Link to="/shop" className="ng-inline-link">{t(lang, "primaryCta")}</Link>} />
+          <SectionHeader eyebrow={isArabic(lang) ? "المنتجات" : "Products"} title={t(lang, "featuredProducts")} text={pickTranslation(settings?.translations, lang, "services_meta_description") || settings?.services_meta_description || t(lang, "heroText")} action={<Link to="/shop" className="ng-inline-link">{t(lang, "primaryCta")}</Link>} />
           <div className="ng-product-grid">{items.slice(0, 8).map((item) => <ProductCard key={item.id} product={item} />)}</div>
         </section>
 
@@ -141,7 +148,7 @@ export const HomePage = () => {
 
         {blogs.length > 0 && (
           <section className="ng-surface" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: '0' }}>
-            <SectionHeader eyebrow={isArabic(lang) ? "مقالات ونصائح" : "Health Magazine"} title={t(lang, "latestStories")} text={isArabic(lang) ? "مقالات مميزة ونصائح مفيدة حول اختيار القهوة المثالية وطرق تحضيرها لتستمتع بأفضل تجربة في كل كوب." : (settings?.about_us?.slice(0, 180) || "Healthy articles and useful information about dairy products.")} action={<Link to="/blog" className="ng-inline-link">{t(lang, "navStories")}</Link>} />
+            <SectionHeader eyebrow={isArabic(lang) ? "مقالات ونصائح" : "Health Magazine"} title={t(lang, "latestStories")} text={pickTranslation(settings?.translations, lang, "about_us")?.slice(0, 180) || settings?.about_us?.slice(0, 180) || (isArabic(lang) ? "مقالات مميزة ونصائح مفيدة حول منتجات الألبان." : "Healthy articles and useful information about dairy products.")} action={<Link to="/blog" className="ng-inline-link">{t(lang, "navStories")}</Link>} />
             <div className="ng-blog-grid">{blogs.slice(0, 3).map((post) => <BlogCard key={post.id} post={post} />)}</div>
           </section>
         )}
@@ -468,15 +475,15 @@ export const AboutPage = () => {
   return (
     <Shell>
       <div className="ng-page">
-        <SectionHeader eyebrow={isArabic(lang) ? "من نحن" : "About"} title={t(lang, "navAbout")} text={isArabic(lang) ? "العمدة للصناعات الغذائية" : (resolveVal(settings?.description) || "Alomda Food Industries")} />
+        <SectionHeader eyebrow={isArabic(lang) ? "من نحن" : "About"} title={t(lang, "navAbout")} text={pickTranslation(settings?.translations, lang, "description") || resolveVal(settings?.description) || (isArabic(lang) ? "ألفا ميلك للصناعات الغذائية" : "Alfa Milk Food Industries")} />
         <section className="ng-surface ng-about-layout">
           <div>
             <h2>{resolveVal(settings?.title) || t(lang, "brandName")}</h2>
             <div dangerouslySetInnerHTML={{ __html: aboutHtml }} className="ng-about-content-html" />
           </div>
           <div className="ng-story-card">
-            <strong>{isArabic(lang) ? "جميع الحقوق محفوظة لمحمصة العمدة ©" : (resolveVal(settings?.copyright) || "All rights reserved to Alomda ©")}</strong>
-            <p>{isArabic(lang) ? "نسعى لأن يكون 'العمدة' من الأسماء الرائدة في عالم القهوة— علامة تجارية مصرية بهوية أصيلة وجودة ثابتة قادرة على المنافسة عالمياً." : (resolveVal(settings?.home_meta_description) || "We strive for \"Al Omda\" to be one of the leading names in the coffee world— an Egyptian brand with an authentic identity and consistent quality that can compete on a global level.")}</p>
+            <strong>{pickTranslation(settings?.translations, lang, "copyright") || resolveVal(settings?.copyright) || (isArabic(lang) ? "جميع الحقوق محفوظة لألفا ميلك ©" : "All rights reserved to Alfa Milk ©")}</strong>
+            <p>{pickTranslation(settings?.translations, lang, "home_meta_description") || resolveVal(settings?.home_meta_description) || (isArabic(lang) ? "نسعى لأن نكون رواداً في صناعة منتجات الألبان بجودة لا تضاهى." : "We strive to be leaders in the dairy industry with unmatched quality.")}</p>
           </div>
         </section>
       </div>
@@ -633,8 +640,8 @@ export const WishlistPage = () => {
   return (
     <Shell>
       <div className="ng-page">
-        <SectionHeader eyebrow="Wishlist" title={t(lang, "navWishlist")} text={`${wishlistItems.length} ${t(lang, "results")}`} />
-        {wishlistItems.length ? <div className="ng-product-grid">{wishlistItems.map((product) => <div key={product.id} className="ng-wishlist-wrap"><ProductCard product={product} /><button className="ng-text-button danger block" style={{ background: "rgba(255, 59, 48, 0.1)", borderRadius: "16px", padding: "12px", marginTop: "8px" }} onClick={() => dispatch(deleteFromWishlist(product, addToast))}>{t(lang, "removeWishlist")}</button></div>)}</div> : <EmptyState title={t(lang, "emptyWishlist")} text={t(lang, "emptyText")} action={<Link className="ng-primary-button ghost" to="/shop">{t(lang, "continueShopping")}</Link>} />}
+        <SectionHeader eyebrow="Wishlist" title={t(lang, "navWishlist")} text={`${wishlistItems.filter(p => p && p.id).length} ${t(lang, "results")}`} />
+        {wishlistItems.filter(p => p && p.id).length ? <div className="ng-product-grid">{wishlistItems.filter(p => p && p.id).map((product) => <div key={product.id} className="ng-wishlist-wrap"><ProductCard product={product} /><button className="ng-text-button danger block" style={{ background: "rgba(255, 59, 48, 0.1)", borderRadius: "16px", padding: "12px", marginTop: "8px" }} onClick={() => dispatch(deleteFromWishlist(product, addToast))}>{t(lang, "removeWishlist")}</button></div>)}</div> : <EmptyState title={t(lang, "emptyWishlist")} text={t(lang, "emptyText")} action={<Link className="ng-primary-button ghost" to="/shop">{t(lang, "continueShopping")}</Link>} />}
       </div>
     </Shell>
   );
