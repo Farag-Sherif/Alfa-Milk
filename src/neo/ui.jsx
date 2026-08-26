@@ -258,9 +258,8 @@ export const Footer = ({ settings }) => {
     <footer className="ng-footer">
       <div className="ng-footer-grid">
         <div className="ng-footer-brand">
-          <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: '24px', textDecoration: 'none' }}>
-            <img src="/15x15.png" alt="Logo" style={{ width: '40px', height: '40px', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }} />
-            <h3 style={{ margin: 0, fontSize: '28px' }}>{settings?.title || t(lang, "brandName")}</h3>
+          <Link to="/" style={{ display: 'block', marginBottom: '24px', textDecoration: 'none' }}>
+            <img src="/new-footer-logo.png" alt="Alfa Milk" style={{ width: '220px', height: 'auto', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }} />
           </Link>
           <p>{t(lang, "footerText")}</p>
           <div className="ng-footer-socials" style={{ display: 'flex', gap: '16px', marginTop: '24px' }}>

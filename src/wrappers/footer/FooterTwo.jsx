@@ -62,20 +62,15 @@ const FooterTwo = ({
       >
         <div className="container">
           <div className="footer-logo">
-            <Link to={process.env.PUBLIC_URL + "/"}>
+            <Link to={process.env.PUBLIC_URL + "/"} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "12px", textDecoration: "none" }}>
+              <span style={{ fontSize: "36px", fontWeight: "900", color: "#fff", letterSpacing: "1px" }}>Alfa-Milk</span>
               <img
-                alt=""
-                // src={`${
-                //   currentLanguageCode === "en" ? "/elmoda EN.svg" : "/elmoda AR.svg"
-                // }`}
-                src={"/logo.png"}
-                width={120}
-                height={120}
+                alt="Alfa Milk"
+                src={"/spilling-milk.png"}
+                width={60}
+                height={60}
                 style={{
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                  maxWidth: "150px",
+                  objectFit: "contain",
                 }}
               />
             </Link>
