@@ -90,13 +90,15 @@ const useBranding = () => {
       axiosInstance.get("/settings"),
       axiosInstance.get("/emails"),
       axiosInstance.get("/mobiles"),
-      axiosInstance.get("/socails")
-    ]).then(([settingsRes, emailRes, mobileRes, socialRes]) => {
+      axiosInstance.get("/socails"),
+      axiosInstance.get("/addresse")
+    ]).then(([settingsRes, emailRes, mobileRes, socialRes, addressRes]) => {
       if (active) {
         const s = settingsRes.data?.settings || {};
         s.supportEmail = emailRes.data?.[0]?.email || "";
         s.supportPhone = mobileRes.data?.[0]?.mobile || "";
         s.socialLinks = socialRes.data || [];
+        s.supportAddress = addressRes.data || "";
         setSettings(s);
       }
     }).catch(() => {});
@@ -296,6 +298,7 @@ export const Footer = ({ settings }) => {
           <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>
              {settings?.supportEmail && <span>📧 {settings.supportEmail}</span>}
              {settings?.supportPhone && <span>📞 <span dir="ltr">{settings.supportPhone}</span></span>}
+             {settings?.supportAddress && <span>📍 {settings.supportAddress}</span>}
           </div>
         </div>
       </div>
