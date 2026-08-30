@@ -76,7 +76,7 @@ const RelatedProductRow = ({
               objectFit: "cover",
               borderRadius: "8px",
             }}
-          />
+           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
         </Link>
 
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -228,7 +228,7 @@ const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
           borderRadius: "8px",
           flexShrink: 0,
         }}
-      />
+       onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
 
       {/* اسم + وزن */}
       <div style={{ flex: 1, minWidth: 0 }}>

@@ -92,7 +92,7 @@ const ProductGridListSingle = ({
                 width={360}
                 height={360}
                 style={{ objectFit: "contain" }}
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
 
             {product.discount ? (
@@ -235,7 +235,7 @@ const ProductGridListSingle = ({
                       loading="lazy"
                       width={360}
                       height={360}
-                    />
+                     onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                   </Link>
                   {product.discount ? (
                     <div className="product-img-badges">

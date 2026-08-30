@@ -34,7 +34,7 @@ const BlogSidebar = ({strings}) => {
                         single?.image_path
                       }
                       alt=""
-                    />
+                     onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                   </Link>
                 </div>
                 <div className="sidebar-blog-content">

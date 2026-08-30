@@ -10,7 +10,7 @@ const BlogPosts = () => {
               <img
                 src={process.env.PUBLIC_URL + "/assets/img/blog/blog-9.jpg"}
                 alt=""
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
           </div>
           <div className="blog-content-2">
@@ -72,7 +72,7 @@ const BlogPosts = () => {
               <img
                 src={process.env.PUBLIC_URL + "/assets/img/blog/blog-8.jpg"}
                 alt=""
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
           </div>
           <div className="blog-content-2">
@@ -134,7 +134,7 @@ const BlogPosts = () => {
               <img
                 src={process.env.PUBLIC_URL + "/assets/img/blog/blog-7.jpg"}
                 alt=""
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
           </div>
           <div className="blog-content-2">
@@ -196,7 +196,7 @@ const BlogPosts = () => {
               <img
                 src={process.env.PUBLIC_URL + "/assets/img/blog/blog-6.jpg"}
                 alt=""
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
           </div>
           <div className="blog-content-2">
@@ -258,7 +258,7 @@ const BlogPosts = () => {
               <img
                 src={process.env.PUBLIC_URL + "/assets/img/blog/blog-5.jpg"}
                 alt=""
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
           </div>
           <div className="blog-content-2">
@@ -320,7 +320,7 @@ const BlogPosts = () => {
               <img
                 src={process.env.PUBLIC_URL + "/assets/img/blog/blog-4.jpg"}
                 alt=""
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
           </div>
           <div className="blog-content-2">

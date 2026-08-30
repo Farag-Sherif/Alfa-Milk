@@ -78,7 +78,7 @@ const MobileMenu = ({currentLanguageCode}) => {
                       maxWidth: "170px",
                       textAlign: "center"
                     }}
-                  />
+                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                 </Link>
               </div>
 

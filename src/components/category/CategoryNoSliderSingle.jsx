@@ -38,7 +38,7 @@ const CategoryNoSliderSingle = ({
             e.currentTarget.style.transform = "scale(1)";
           }}>
           <img
-            src={`https://alfamilk.test.do-go.net/en/images/${data.logo}`}
+            src={data.logo_path || `https://alfamilk.test.do-go.net/images/${data.logo}`}
             alt={data.name}
             style={{
               width: "180px",
@@ -50,6 +50,7 @@ const CategoryNoSliderSingle = ({
               transform: "translateX(-50%)",
               filter: "drop-shadow(0px 8px 10px rgba(0,0,0,0.2))",
             }}
+            onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }}
           />
         </div>
 

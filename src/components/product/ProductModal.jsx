@@ -112,7 +112,7 @@ function ProductModal({
                     src={product.image_path}
                     className="img-fluid"
                     alt="img"
-                  />
+                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                 </div>
               </div>
             </div>

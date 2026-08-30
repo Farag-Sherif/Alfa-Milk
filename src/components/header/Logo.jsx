@@ -43,7 +43,7 @@ const Logo = ({ currentLanguageCode, logoClass }) => {
             maxWidth: 100,
             display: "block",
           }}
-        />
+         onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       </Link>
     </div>
   );

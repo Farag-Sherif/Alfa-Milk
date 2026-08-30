@@ -9,7 +9,7 @@ const BlogFeaturedSingle = ({ singlePost, currentLanguageCode }) => {
       <div className="blog-wrap mb-30 scroll-zoom">
         <div className="blog-img">
           <Link to={`/post/${singlePost.id}`}>
-            <img src={singlePost.image_path} alt="" />
+            <img src={singlePost.image_path} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           </Link>
         </div>
         <div className="blog-content-wrap">

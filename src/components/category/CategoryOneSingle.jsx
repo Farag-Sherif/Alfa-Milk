@@ -6,7 +6,7 @@ const CategoryOneSingle = ({ data, sliderClass }) => {
   return (
     <div className={`collection-product-2 ${sliderClass ? sliderClass : ""}`}>
       <Link to={process.env.PUBLIC_URL + data.link}>
-        <img src={process.env.PUBLIC_URL + data.image} alt="" />
+        <img src={process.env.PUBLIC_URL + data.image} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       </Link>
       <div className="collection-content-2 text-center">
         <span>{data.subtitle}</span>

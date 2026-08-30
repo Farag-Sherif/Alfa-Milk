@@ -96,14 +96,14 @@ const Product = ({ product, currentLanguageCode, strings }) => {
               src={product.image_path}
               alt={product.name}
               loading="lazy"
-            />
+             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             {product.image && product.image.length > 1 && (
               <img
                 className="hover-img img-fluid"
                 src={product.image_path}
                 alt={product.name}
                 loading="lazy"
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             )}
           </Link>
 

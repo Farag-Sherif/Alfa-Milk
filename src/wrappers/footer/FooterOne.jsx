@@ -367,7 +367,7 @@ const FooterOne = ({
                               alt={"certificate"}
                               width={80}
                               height={80}
-                            />
+                             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                           </a>
                         </div>
                       );
@@ -502,7 +502,7 @@ const FooterOne = ({
                           alt={"certificate"}
                           width={80}
                           height={80}
-                        />
+                         onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                       </a>
                     </div>
                   );

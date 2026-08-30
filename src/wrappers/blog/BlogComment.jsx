@@ -10,7 +10,7 @@ const BlogComment = () => {
             <img
               src={process.env.PUBLIC_URL + "/assets/img/blog/comment-1.jpg"}
               alt=""
-            />
+             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           </div>
           <div className="blog-comment-content">
             <h4>Anthony Stephens</h4>
@@ -27,7 +27,7 @@ const BlogComment = () => {
             <img
               src={process.env.PUBLIC_URL + "/assets/img/blog/comment-2.jpg"}
               alt=""
-            />
+             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           </div>
           <div className="blog-comment-content">
             <h4>DX Joxova</h4>

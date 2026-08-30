@@ -39,7 +39,7 @@ const CountDownFive = ({
                 src={process.env.PUBLIC_URL + image}
                 alt=""
                 className="img-fluid"
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </div>
           </div>
         </div>

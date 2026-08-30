@@ -9,7 +9,7 @@ const BlogPostsNoSidebar = ({ currentLanguageCode, singlePost, strings }) => {
         <div className="blog-wrap-2 mb-30">
           <div className="blog-img-2">
             <Link to={`/post?postId=${singlePost.id}`}>
-              <img src={singlePost.image_path} alt="" />
+              <img src={singlePost.image_path} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
           </div>
           <div className="blog-content-2">

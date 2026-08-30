@@ -19,7 +19,7 @@ const BlogPost = ({ data, currentLanguageCode, strings }) => {
                 ? data?.item?.translations[0].title
                 : data?.item?.translations[1].title
             }
-          />
+           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
         </div>
         <div
           className={`blog-details-content ${

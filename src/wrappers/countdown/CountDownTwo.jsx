@@ -73,7 +73,7 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, strings }) => {
                     src={`https://alfamilk.test.do-go.net/images/${offer?.image}`}
                     alt="deal of day"
                     loading="lazy"
-                  />
+                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                 </Link>
               </div>
             </div>

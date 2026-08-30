@@ -387,7 +387,7 @@ const DesktopRow = ({ cartItem, currentLanguageCode }) => {
             alt={cartItem.name}
             width={110}
             height={140}
-          />
+           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
         </Link>
       </td>
 
@@ -461,7 +461,7 @@ const MobileCard = ({ cartItem, currentLanguageCode, currency }) => {
   const imageEl = (
     <div className="cart-mobile-card__image">
       <Link to={process.env.PUBLIC_URL + "/product/" + cartItem.slug}>
-        <img src={cartItem.image_path} alt={cartItem.name} />
+        <img src={cartItem.image_path} alt={cartItem.name}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       </Link>
     </div>
   );

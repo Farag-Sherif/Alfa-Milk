@@ -77,7 +77,7 @@ const ProductImageFixed = ({ product }) => {
                 marginBlock: "50px",
                 width: "100%",
               }}
-            />
+             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           )}
         </div>
       </div>

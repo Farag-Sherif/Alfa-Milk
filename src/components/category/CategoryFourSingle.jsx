@@ -7,7 +7,7 @@ const CategoryFourSingle = ({ data, sliderClass }) => {
     <div className={`collection-product ${sliderClass ? sliderClass : ""}`}>
       <div className="collection-img">
         <Link to={process.env.PUBLIC_URL + data.link}>
-          <img src={process.env.PUBLIC_URL + data.image} alt="" />
+          <img src={process.env.PUBLIC_URL + data.image} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
         </Link>
       </div>
       <div className="collection-content text-center">

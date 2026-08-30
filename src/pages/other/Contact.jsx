@@ -174,7 +174,7 @@ const Contact = ({ strings, currentLanguageCode }) => {
                                 objectFit: "cover",
                                 borderRadius: "50%",
                               }}
-                            />
+                             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                           </a>
                         </li>
                       ))}

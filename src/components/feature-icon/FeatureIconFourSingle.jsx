@@ -17,7 +17,7 @@ const FeatureIconFourSingle = ({ data, spaceBottomClass, colClass }) => {
             marginTop: "50px",
             marginBottom: "50px"
           }}
-        />
+         onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       </div>
     </div>
   );

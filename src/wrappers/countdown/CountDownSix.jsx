@@ -38,7 +38,7 @@ const CountDownSix = ({
                   src={process.env.PUBLIC_URL + countDownImage}
                   alt=""
                   className="img-fluid"
-                />
+                 onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
               </Link>
             </div>
           </div>
@@ -48,7 +48,7 @@ const CountDownSix = ({
         <img
           src={process.env.PUBLIC_URL + "/assets/img/bg/shape-2.png"}
           alt=""
-        />
+         onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       </div>
     </div>
   );

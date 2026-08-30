@@ -102,7 +102,7 @@ const Wishlist = ({
                                         wishlistItem?.image_path || "/deal.png"
                                       }
                                       alt="ITEMS"
-                                    />
+                                     onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                                   </Link>
                                 </td>
 

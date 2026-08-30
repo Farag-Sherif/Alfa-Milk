@@ -35,7 +35,7 @@ const MenuCart = ({
                         alt={single.name}
                         src={single.image_path}
                         className="img-fluid"
-                      />
+                       onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                     </Link>
                   </div>
                   <div className="shopping-cart-title">

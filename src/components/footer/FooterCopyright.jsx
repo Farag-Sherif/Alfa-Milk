@@ -31,7 +31,7 @@ const FooterCopyright = ({
               height: "100%",
               maxWidth: "150px",
             }}
-          />
+           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
         </Link>
       </div>
       {/* <p>

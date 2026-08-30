@@ -53,9 +53,9 @@ const ProductGridSingleTwo = ({
           
           <div className="product-img">
             <Link to={process.env.PUBLIC_URL + "/product/" + product.slug}>
-              <img className="default-img" src={process.env.PUBLIC_URL + product.image_path} alt="" />
+              <img className="default-img" src={process.env.PUBLIC_URL + product.image_path} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
               {product.image && product.image.length > 1 && (
-                <img className="hover-img" src={process.env.PUBLIC_URL + product.image[1]} alt="" />
+                <img className="hover-img" src={process.env.PUBLIC_URL + product.image[1]} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
               )}
             </Link>
             

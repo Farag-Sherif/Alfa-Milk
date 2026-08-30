@@ -307,7 +307,7 @@ function CheckoutModal({
                     width={100}
                     height={100}
                     className="rounded"
-                  />
+                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                   <p>
                     {currentLanguageCode === "ar"
                       ? el.translations[0]?.name

@@ -9,7 +9,7 @@ const BannerOneSingle = ({ data, spaceBottomClass }) => {
         className={`single-banner ${spaceBottomClass ? spaceBottomClass : ""}`}
       >
         <Link to={process.env.PUBLIC_URL + data.link}>
-          <img src={process.env.PUBLIC_URL + data.image} alt="" />
+          <img src={process.env.PUBLIC_URL + data.image} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
         </Link>
         <div className="banner-content">
           <h3>{data.title}</h3>

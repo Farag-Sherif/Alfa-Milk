@@ -12,7 +12,7 @@ const CategoryFiveSingle = ({ data }) => {
               src={process.env.PUBLIC_URL + data.image}
               alt=""
               className="img-fluid"
-            />
+             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           </Link>
         </div>
         <div className="category-grid__content">

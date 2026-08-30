@@ -38,7 +38,7 @@ const CountDownFour = ({
                   src={process.env.PUBLIC_URL + countDownImage}
                   alt=""
                   className="img-fluid"
-                />
+                 onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
               </Link>
             </div>
           </div>

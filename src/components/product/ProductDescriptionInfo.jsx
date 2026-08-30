@@ -181,15 +181,11 @@ const ProductDescriptionInfo = ({
           {icons?.map((icon, index) => (
             <div key={index} className="text-center mx-2">
               <img
-                src={`https://alfamilk.test.do-go.net/ar/images/${icon?.icon}`}
-                className="img-fluid"
-                width={50}
-                height={50}
-                alt={
-                  currentLanguageCode === "ar"
-                    ? icon?.translations[0].name
-                    : icon?.translations[1].name
-                }
+                src={icon?.icon_path || `https://alfamilk.test.do-go.net/images/${icon?.icon}`}
+                alt={currentLanguageCode === "ar" ? icon?.translations[0].name : icon?.translations[1].name}
+                className="img-fluid mb-2"
+                style={{ width: "50px", height: "50px", objectFit: "contain" }}
+                onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }}
               />
               <p>
                 {currentLanguageCode === "ar"
@@ -267,7 +263,7 @@ const ProductDescriptionInfo = ({
             alt="COVER"
             loading="lazy"
             style={{ marginBlock: "50px", width: "100%" }}
-          />
+           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
         )}
       </div>
       

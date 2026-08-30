@@ -24,20 +24,17 @@ function Icons({ currentLanguageCode }) {
                 <div key={index} className="col">
                   <div className="text-center">
                     <img
-                      src={`https://alfamilk.test.do-go.net/ar/images/${icon?.icon}`}
+                      src={icon?.icon_path || `https://alfamilk.test.do-go.net/images/${icon?.icon}`}
                       alt={
                         currentLanguageCode === "ar"
                           ? icon?.translations[0].name
                           : icon?.translations[1].name
                       }
                       className=" mb-2"
-                      style={{
-                        objectFit: "cover",
-                        width: "calc((100% - 20px) / 3)",
-                        height: "85px",
-                      }}
+                      style={{ width: "50px", height: "50px" }}
+                      onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }}
                     />
-                    <p>
+                    <p style={{ marginTop: "10px", fontSize: "14px" }}>
                       {currentLanguageCode === "ar"
                         ? icon?.translations[0].name
                         : icon?.translations[1].name}

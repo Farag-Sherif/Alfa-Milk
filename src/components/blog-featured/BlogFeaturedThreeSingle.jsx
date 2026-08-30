@@ -20,7 +20,7 @@ const BlogFeaturedThreeSingle = ({
                   ? singlePost.translations[0].title
                   : singlePost.translations[1].title
               }
-            />
+             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           </Link>
         </div>
         <div className="blog-content-2">

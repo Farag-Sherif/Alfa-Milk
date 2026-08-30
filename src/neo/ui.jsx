@@ -189,7 +189,7 @@ export const TopNavigation = ({ settings, isHome = false }) => {
       <div className="ng-topbar-inner">
         <button className="ng-mobile-menu-btn" onClick={() => setMobileMenuOpen(true)}>☰</button>
         <Link to="/" className="ng-brandmark">
-          {settings?.image_logo_path ? <img src={settings.image_logo_path} alt="brand" /> : <div className="ng-brandmark-dot" />}
+          {settings?.image_logo_path ? <img src={settings.image_logo_path} alt="brand" onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /> : <div className="ng-brandmark-dot" />}
         </Link>
 
         <nav className="ng-navlinks">
@@ -261,7 +261,7 @@ export const Footer = ({ settings }) => {
       <div className="ng-footer-grid">
         <div className="ng-footer-brand">
           <Link to="/" style={{ display: 'block', marginBottom: '24px', textDecoration: 'none' }}>
-            <img src="/new-footer-logo.png" alt="Alfa Milk" style={{ width: '220px', height: 'auto', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }} />
+            <img src="/new-footer-logo.png" alt="Alfa Milk" style={{ width: '220px', height: 'auto', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))' }}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           </Link>
           <p>{t(lang, "footerText")}</p>
           <div className="ng-footer-socials" style={{ display: 'flex', gap: '16px', marginTop: '24px' }}>
@@ -351,7 +351,7 @@ export const ProductCard = ({ product, compact = false }) => {
         {wishlisted ? "♥" : "♡"}
       </button>
       <Link to={`/product/${product.slug}`} className="ng-product-media">
-        <img src={product?.image_path || product?.cover_path || "/deal.png"} alt={productName(product, lang)} />
+        <img src={product?.image_path || product?.cover_path || "/deal.png"} alt={productName(product, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       </Link>
       <div className="ng-product-body">
         <span className="ng-product-category">{categoryName(product?.category || product?.cafe, lang)}</span>
@@ -386,7 +386,7 @@ export const BlogCard = ({ post }) => {
   const excerpt = (post?.translations?.find((item) => item.locale === (isArabic(lang) ? "ar" : "en"))?.content || post?.content || "").replace(/<[^>]*>/g, " ").slice(0, 160);
   return (
     <article className="ng-blog-card">
-      <img src={post?.image_path} alt={title} />
+      <img src={post?.image_path} alt={title}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       <div>
         <span>{t(lang, "minutesRead")} · 4</span>
         <h3>{title}</h3>
@@ -406,7 +406,7 @@ const MiniCartItem = ({ item }) => {
 
   return (
     <div className="ng-mini-cart-item">
-      <img src={item?.image_path || "/deal.png"} alt={productName(item, lang)} />
+      <img src={item?.image_path || "/deal.png"} alt={productName(item, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       <div className="ng-mini-cart-item-info">
         <strong>{productName(item, lang)}</strong>
         <div className="ng-mini-cart-item-price-row">
@@ -434,7 +434,7 @@ const MiniCartRelatedItem = ({ product }) => {
 
   return (
     <div className="ng-mini-cart-item related">
-      <img src={product?.image_path || "/deal.png"} alt={productName(product, lang)} />
+      <img src={product?.image_path || "/deal.png"} alt={productName(product, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       <div className="ng-mini-cart-item-info">
         <strong>{productName(product, lang)}</strong>
         <span>{formatCurrency(getFinalPrice(product), lang)}</span>
@@ -500,7 +500,7 @@ export const CartLine = ({ item }) => {
   const total = getFinalPrice(item, Number(item?.price) || getBasePrice(item)) * qty;
   return (
     <div className="ng-cart-line">
-      <img src={item?.image_path || "/deal.png"} alt={productName(item, lang)} />
+      <img src={item?.image_path || "/deal.png"} alt={productName(item, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
       <div>
         <strong>{productName(item, lang)}</strong>
         <span>{formatWeight(item?.size || item?.weight || "", lang)}</span>
@@ -549,7 +549,7 @@ export const HeroPanel = ({ settings, banners = [] }) => {
       <section style={{ position: 'relative', width: '100vw', margin: '0 calc(50% - 50vw)', height: '95vh', minHeight: '600px', borderRadius: '0', overflow: 'hidden', boxShadow: 'none' }}>
         {banners.map((banner, index) => (
           <div key={banner.id || index} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: index === currentIndex ? 1 : 0, transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: 'none' }}>
-            <img src={banner.image_path} alt={banner.title || "Banner"} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src={banner.image_path} alt={banner.title || "Banner"} style={{ width: '100%', height: '100%', objectFit: 'cover' }}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           </div>
         ))}
         {banners.length > 1 && (

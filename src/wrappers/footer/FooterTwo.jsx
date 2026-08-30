@@ -72,7 +72,7 @@ const FooterTwo = ({
                 style={{
                   objectFit: "contain",
                 }}
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             </Link>
           </div>
           <p>
@@ -95,7 +95,7 @@ const FooterTwo = ({
                         objectFit: "cover",
                         borderRadius: "50%",
                       }}
-                    />
+                     onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                   </a>
                 </li>
               ))}

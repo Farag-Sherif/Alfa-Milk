@@ -8,7 +8,7 @@ const BlogFeaturedFiveSingle = ({ singlePost }) => {
       <div className="blog-wrap-3 mb-30 scroll-zoom">
         <div className="blog-img mb-30">
           <Link to={process.env.PUBLIC_URL + singlePost.url}>
-            <img src={process.env.PUBLIC_URL + singlePost.image} alt="" />
+            <img src={process.env.PUBLIC_URL + singlePost.image} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           </Link>
         </div>
         <div className="blog-content-wrap">
@@ -22,7 +22,7 @@ const BlogFeaturedFiveSingle = ({ singlePost }) => {
             })} */}
             <div className="blog-img">
               <Link to={`/post/${singlePost.id}`}>
-                <img src={singlePost.image_path} alt="" className="img-fluid" />
+                <img src={singlePost.image_path} alt="" className="img-fluid"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
               </Link>
             </div>{" "}
           </div>

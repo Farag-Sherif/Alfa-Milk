@@ -12,7 +12,7 @@ const TeamMemberOneSingle = ({ data, spaceBottomClass }) => {
             src={process.env.PUBLIC_URL + data.image}
             alt=""
             className="img-fluid"
-          />
+           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           <div className="team-action">
             <a
               className="facebook"

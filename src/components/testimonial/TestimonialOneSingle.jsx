@@ -61,7 +61,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
             src={productImage}
             alt={productName || "product"}
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          />
+           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
         ) : (
           <div
             style={{
@@ -98,7 +98,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
               objectFit: "cover",
               border: "2px solid #c8a96e",
             }}
-          />
+           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
           <div>
             <div
               style={{
@@ -172,7 +172,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
                   borderRadius: "8px",
                   border: "1px solid #eee",
                 }}
-              />
+               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
             )}
             <span style={{ fontSize: "12px", color: "#777" }}>
               {productName}
