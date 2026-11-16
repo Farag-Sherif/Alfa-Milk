@@ -35,6 +35,8 @@ const Logo = ({ currentLanguageCode, logoClass }) => {
     <div className={`${logoClass || ""} mt-0`}>
       <Link to={`${process.env.PUBLIC_URL || ""}/`}>
         <img
+          loading="lazy"
+          decoding="async"
           src={`${process.env.PUBLIC_URL || ""}/logo.png`}
           alt="Logo"
           style={{

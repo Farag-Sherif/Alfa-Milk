@@ -68,6 +68,8 @@ const RelatedProductRow = ({
           onClick={handleClose}
           style={{ flexShrink: 0 }}>
           <img
+            loading="lazy"
+            decoding="async"
             src={item.image_path}
             alt={itemName}
             style={{
@@ -219,6 +221,8 @@ const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
       style={{ gap: "10px" }}>
       {/* صورة */}
       <img
+        loading="lazy"
+        decoding="async"
         src={item.image_path}
         alt={itemName}
         style={{

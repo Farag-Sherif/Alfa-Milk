@@ -19,7 +19,7 @@ const BlogNoSidebar = ({ location, strings }) => {
     const fetchItems = async () => {
       try {
         const response = await axios.get(
-          "https://alfamilk.test.do-go.net/api/blogs"
+          "https://admin.alfa-milk.com/api/blogs"
         );
         setBlogFeaturedData(response.data);
       } catch (error) {

@@ -24,7 +24,7 @@ function Icons({ currentLanguageCode }) {
                 <div key={index} className="col">
                   <div className="text-center">
                     <img
-                      src={icon?.icon_path || `https://alfamilk.test.do-go.net/images/${icon?.icon}`}
+                      src={icon?.icon_path || `https://admin.alfa-milk.com/images/${icon?.icon}`}
                       alt={
                         currentLanguageCode === "ar"
                           ? icon?.translations[0].name

@@ -9,7 +9,7 @@ const HeroSliderFiveSingle = ({ data, sliderClass }) => {
         sliderClass ? sliderClass : ""
       }`}
       style={{
-        backgroundImage: `url(https://alfamilk.test.do-go.net/images/${data.image})`,
+        backgroundImage: `url(https://admin.alfa-milk.com/images/${data.image})`,
       }}
     >
       <div className="container">

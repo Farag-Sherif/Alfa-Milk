@@ -89,6 +89,7 @@ const ProductGridListSingle = ({
                 src={process.env.PUBLIC_URL + product.image_path}
                 alt={product.name}
                 loading="lazy"
+                decoding="async"
                 width={360}
                 height={360}
                 style={{ objectFit: "contain" }}
@@ -233,6 +234,7 @@ const ProductGridListSingle = ({
                           : product.translations[1]?.name
                       }
                       loading="lazy"
+                      decoding="async"
                       width={360}
                       height={360}
                      onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />

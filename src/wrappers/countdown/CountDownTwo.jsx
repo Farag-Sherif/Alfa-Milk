@@ -70,7 +70,7 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, strings }) => {
               <div className="fruits-deal-img">
                 <Link to={`product/${offer?.url.split("/")[offer?.url.split("/").length - 1]}/`}>
                   <img
-                    src={`https://alfamilk.test.do-go.net/images/${offer?.image}`}
+                    src={`https://admin.alfa-milk.com/images/${offer?.image}`}
                     alt="deal of day"
                     loading="lazy"
                    onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />

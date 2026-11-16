@@ -302,6 +302,8 @@ function CheckoutModal({
                   key={el.cartItemId || el.id}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={el?.image_path}
                     alt="el Images"
                     width={100}

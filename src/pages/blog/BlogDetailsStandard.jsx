@@ -27,7 +27,7 @@ const BlogDetailsStandard = ({ location, strings, currentLanguageCode }) => {
         
 
         const response = await axios.get(
-          `https://alfamilk.test.do-go.net/api/blog/${postId}`
+          `https://admin.alfa-milk.com/api/blog/${postId}`
         );
         console.log(response.data);
         setPost(response.data);

@@ -55,7 +55,7 @@ const BannerFive = ({ strings, currentLanguageCode }) => {
                   <div className="col-lg-12" key={el.id}>
                     <div className="single-banner mb-20">
                       <Link to={getLocalPath(el?.url)}>
-                        <img src={el.image_path} alt="Banner" loading="lazy"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                        <img src={el.image_path} alt="Banner" loading="lazy" decoding="async"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                       </Link>
                       <div className="banner-content-3 banner-position-hm15-1">
                         <h3>
@@ -86,6 +86,7 @@ const BannerFive = ({ strings, currentLanguageCode }) => {
                     src={mainBanner?.image_path}
                     alt="Banner"
                     loading="lazy"
+                    decoding="async"
                    onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                 </Link>
                 <div className="banner-content-4 banner-position-hm15-2">
@@ -118,7 +119,7 @@ const BannerFive = ({ strings, currentLanguageCode }) => {
                   <div className="col-lg-12 col-md-6" key={el.id}>
                     <div className="single-banner mb-20">
                       <Link to={getLocalPath(el?.url)}>
-                        <img src={el.image_path} alt="Banner" loading="lazy"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                        <img src={el.image_path} alt="Banner" loading="lazy" decoding="async"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                       </Link>
                       <div className="banner-content-3 banner-position-hm15-2">
                         <h3>

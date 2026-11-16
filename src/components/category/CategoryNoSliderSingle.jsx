@@ -38,7 +38,7 @@ const CategoryNoSliderSingle = ({
             e.currentTarget.style.transform = "scale(1)";
           }}>
           <img
-            src={data.logo_path || `https://alfamilk.test.do-go.net/images/${data.logo}`}
+            src={data.logo_path || `https://admin.alfa-milk.com/images/${data.logo}`}
             alt={data.name}
             style={{
               width: "180px",

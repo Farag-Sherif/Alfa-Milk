@@ -338,7 +338,7 @@ console.log(user);
                                               <div className="col-3 col-md-2">
                                                 <img
                                                   width={80}
-                                                  src={`https://alfamilk.test.do-go.net/images/${item.image}`}
+                                                  src={`https://admin.alfa-milk.com/images/${item.image}`}
                                                   alt={item.name}
                                                   className="img-fluid rounded shadow-sm"
                                                  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />

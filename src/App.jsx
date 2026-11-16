@@ -3,23 +3,22 @@ import { BrowserRouter as Router, Route, Switch, useLocation } from "react-route
 import { ToastProvider } from "react-toast-notifications";
 import { connect } from "react-redux";
 import { loadLanguages } from "redux-multilanguage";
-import {
-  AboutPage,
-  AccountPage,
-  AuthPage,
-  BlogDetailPage,
-  BlogPage,
-  CartPage,
-  CheckoutPage,
-  ContactPage,
-  HomePage,
-  NotFoundPage,
-  OffersPage,
-  ProductPage,
-  ShopPage,
-  WishlistPage
-} from "./neo/pages";
 import { LoadingScreen } from "./neo/ui";
+
+const HomePage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.HomePage })));
+const ShopPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.ShopPage })));
+const OffersPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.OffersPage })));
+const BlogPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.BlogPage })));
+const BlogDetailPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.BlogDetailPage })));
+const ProductPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.ProductPage })));
+const AboutPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.AboutPage })));
+const ContactPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.ContactPage })));
+const AccountPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.AccountPage })));
+const AuthPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.AuthPage })));
+const CartPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.CartPage })));
+const WishlistPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.WishlistPage })));
+const CheckoutPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.CheckoutPage })));
+const NotFoundPage = React.lazy(() => import("./neo/pages").then((m) => ({ default: m.NotFoundPage })));
 
 const ScrollToTop = () => {
   const location = useLocation();

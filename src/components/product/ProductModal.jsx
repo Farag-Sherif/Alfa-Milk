@@ -109,6 +109,8 @@ function ProductModal({
               <div className="product-large-image-wrapper">
                 <div className="single-image">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={product.image_path}
                     className="img-fluid"
                     alt="img"

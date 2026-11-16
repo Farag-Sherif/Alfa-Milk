@@ -63,7 +63,7 @@ const usePublicBootstrap = () => {
       axiosInstance.get("/cafes"),
       axiosInstance.get("/items"),
       axiosInstance.get("/offers"),
-      axios.get("https://alfamilk.test.do-go.net/api/blogs"),
+      axiosInstance.get("/blogs"),
       axiosInstance.get("/features"),
       axiosInstance.get("/faqs"),
       axiosInstance.get(isMobileOrTablet ? "/sliders-phone" : "/sliders-web")
@@ -124,7 +124,7 @@ export const HomePage = () => {
           <div className="ng-category-grid">
             {categories.slice(0, 6).map((category) => (
               <Link to={`/shop?category=${category.slug}`} className="ng-category-card" key={category.id} style={{ borderRadius: '24px', boxShadow: '0 8px 24px rgba(0,0,0,0.04)' }}>
-                <img src={category.logo_path} alt={categoryName(category, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                <img loading="lazy" decoding="async" src={category.logo_path} alt={categoryName(category, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
                 <div style={{ flex: 1 }}>
                   <strong>{categoryName(category, lang)}</strong>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '8px', color: 'var(--ng-primary)', fontWeight: 'bold' }}>{isArabic(lang) ? "تصفح" : "Browse"} <span style={{ fontSize: '18px' }}>→</span></span>
@@ -223,6 +223,15 @@ export const ShopPage = () => {
   const currentSlice = filtered.slice((page - 1) * perPage, page * perPage);
   useEffect(() => { setPage(1); }, [query, activeCategory, sort]);
 
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
+
   return (
     <Shell>
       <div className="ng-page">
@@ -237,7 +246,7 @@ export const ShopPage = () => {
           setActiveCategory={setActiveCategory}
         />
         {loading ? <LoadingScreen label="Loading catalog" /> : currentSlice.length ? <div className="ng-product-grid">{currentSlice.map((item) => <ProductCard key={item.id} product={item} />)}</div> : <EmptyState title={t(lang, "emptyTitle")} text={t(lang, "emptyText")} action={<Link className="ng-primary-button ghost" to="/shop">{t(lang, "allProducts")}</Link>} />}
-        <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+        <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
     </Shell>
   );
@@ -352,7 +361,7 @@ export const ProductPage = () => {
       <div className="ng-page ng-product-page">
         <div className="ng-product-layout">
           <div className="ng-product-gallery">
-            <div className="ng-product-hero-image"><img src={product?.image_path} alt={productName(product, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /></div>
+            <div className="ng-product-hero-image"><img loading="lazy" decoding="async" src={product?.image_path} alt={productName(product, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /></div>
             <div className="ng-product-mini-info">
               <div>
                 <span>{t(lang, "overview")}</span>
@@ -406,7 +415,7 @@ export const BlogPage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get("https://alfamilk.test.do-go.net/api/blogs").then((res) => setPosts(res.data || [])).finally(() => setLoading(false));
+    axiosInstance.get("/blogs").then((res) => setPosts(res.data || [])).finally(() => setLoading(false));
   }, []);
   return <Shell><div className="ng-page"><SectionHeader eyebrow={isArabic(lang) ? "المدونة" : "Blog"} title={t(lang, "navStories")} text={t(lang, "latestStories")} />{loading ? <LoadingScreen /> : <div className="ng-blog-grid">{posts.map((post) => <BlogCard key={post.id} post={post} />)}</div>}</div></Shell>;
 };
@@ -421,71 +430,71 @@ export const BlogDetailPage = () => {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    axios.get(`https://alfamilk.test.do-go.net/api/blog/${id}`).then((res) => setPost(res.data?.item || res.data?.post || res.data?.item || res.data)).finally(() => setLoading(false));
+    axiosInstance.get(`/blog/${id}`).then((res) => setPost(res.data?.item || res.data?.post || res.data?.item || res.data)).finally(() => setLoading(false));
   }, [id]);
   const title = pickTranslation(post?.translations, lang, "title") || post?.title;
   const html = pickTranslation(post?.translations, lang, "content") || post?.content || "";
-  return <Shell><div className="ng-page">{loading ? <LoadingScreen /> : <article className="ng-article-shell"><img src={post?.image_path} alt={title}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /><span className="ng-eyebrow">{formatDate(post?.created_at, lang)}</span><h1>{title}</h1><div className="ng-article-content" dangerouslySetInnerHTML={{ __html: html }} /></article>}</div></Shell>;
+  return <Shell><div className="ng-page">{loading ? <LoadingScreen /> : <article className="ng-article-shell"><img loading="lazy" decoding="async" src={post?.image_path} alt={title}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /><span className="ng-eyebrow">{formatDate(post?.created_at, lang)}</span><h1>{title}</h1><div className="ng-article-content" dangerouslySetInnerHTML={{ __html: html }} /></article>}</div></Shell>;
 };
 
 export const AboutPage = () => {
   const lang = useLang();
   const [about, setAbout] = useState(null);
   const [settings, setSettings] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    Promise.all([axiosInstance.get("/about"), axiosInstance.get("/settings")]).then(([aboutRes, settingsRes]) => {
-      setAbout(aboutRes.data || null);
-      setSettings(settingsRes.data?.settings || null);
-    });
+    let active = true;
+    setLoading(true);
+    Promise.all([axiosInstance.get("/about"), axiosInstance.get("/settings")])
+      .then(([aboutRes, settingsRes]) => {
+        if (!active) return;
+        setAbout(aboutRes.data || null);
+        setSettings(settingsRes.data?.settings || null);
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
   }, []);
+
   const resolveVal = (val) => typeof val === "object" && val !== null ? val[lang] || val.en || val.ar || "" : val || "";
 
-  const aboutEn = `
-    <p><strong>Welcome to Al Omda</strong></p>
-    <p>“Al Omda” isn’t just coffee… It’s a name with weight — a presence you feel before it’s even spoken.</p>
-    <p>From the heart of old Egyptian stories, the name “Al Omda” emerged as a symbol of trust, prestige, and a word that truly matters. And that’s exactly what we deliver in every cup. We carefully select our beans from the finest origins around the world — from rich Brazilian, to authentic Yemeni, to balanced Colombian… all the way to expertly crafted espresso blends for those seeking a stronger experience.</p>
-    <p>But the real value isn’t just in the origin… The value is in the selection, the roasting, and the small details that make all the difference.</p>
-    <p>At “Al Omda,” every cup is made to:</p>
-    <ul style="list-style: none; padding: 0; margin: 16px 0;">
-      <li style="margin-bottom: 8px; color: var(--ng-primary);">✔ <span style="color: var(--ng-secondary);">Preserve an authentic taste</span></li>
-      <li style="margin-bottom: 8px; color: var(--ng-primary);">✔ <span style="color: var(--ng-secondary);">Deliver consistent quality</span></li>
-      <li style="margin-bottom: 8px; color: var(--ng-primary);">✔ <span style="color: var(--ng-secondary);">Turn coffee into a meaningful experience… not just a habit</span></li>
-    </ul>
-    <p>We believe coffee is more than just a drink… It’s a mood, a state of mind, and a daily companion many people start their day with.</p>
-    <p>That’s why our goal isn’t just to sell coffee… Our goal is to be the first choice for anyone seeking authentic taste, trusted quality, and a name that carries value.</p>
-  `;
+  const defaultFallback = isArabic(lang)
+    ? "<p>ألفا ميلك للصناعات الغذائية - نسعى لتقديم أجود أنواع منتجات الألبان والأغذية بأعلى معايير الجودة والسلامة والتصنيع.</p>"
+    : "<p>Alfa Milk Food Industries - dedicated to delivering the finest dairy and food products with top-tier quality standards.</p>";
 
-  const aboutAr = `
-    <p><strong>مرحباً بك في العمدة</strong></p>
-    <p>"العمدة" ليست مجرد قهوة... إنه اسم له وزن - حضور تشعر به قبل حتى أن يُنطق.</p>
-    <p>من قلب القصص المصرية القديمة، برز اسم "العمدة" كرمز للثقة، والهيبة، والكلمة التي تعني الكثير حقاً. وهذا بالضبط ما نقدمه في كل كوب. نحن نختار حبوبنا بعناية من أفضل المصادر حول العالم — من البرازيلي الغني، إلى اليمني الأصيل، إلى الكولومبي المتوازن... وصولاً إلى خلطات الإسبريسو المصنوعة بخبرة لمن يبحثون عن تجربة أقوى.</p>
-    <p>لكن القيمة الحقيقية ليست فقط في المصدر... القيمة تكمن في الاختيار، والتحميص، والتفاصيل الصغيرة التي تصنع كل الفرق.</p>
-    <p>في "العمدة"، يُصنع كل كوب من أجل:</p>
-    <ul style="list-style: none; padding: 0; margin: 16px 0;">
-      <li style="margin-bottom: 8px; color: var(--ng-primary);">✔ <span style="color: var(--ng-secondary);">الحفاظ على المذاق الأصيل</span></li>
-      <li style="margin-bottom: 8px; color: var(--ng-primary);">✔ <span style="color: var(--ng-secondary);">تقديم جودة ثابتة ومستقرة</span></li>
-      <li style="margin-bottom: 8px; color: var(--ng-primary);">✔ <span style="color: var(--ng-secondary);">تحويل القهوة إلى تجربة ذات معنى... وليست مجرد عادة</span></li>
-    </ul>
-    <p>نحن نؤمن أن القهوة أكثر من مجرد مشروب... إنها مزاج، وحالة ذهنية، ورفيق يومي يبدأ به الكثيرون يومهم.</p>
-    <p>لذلك، هدفنا ليس مجرد بيع القهوة... هدفنا هو أن نكون الخيار الأول لمن يبحث عن المذاق الأصيل، والجودة الموثوقة، والاسم الذي يحمل قيمة حقيقية.</p>
-  `;
-
-  const aboutHtml = pickTranslation(settings?.translations, lang, "about_us") || resolveVal(settings?.about_us) || resolveVal(about?.about_us) || (lang === "en" ? aboutEn : aboutAr);
+  const aboutHtml =
+    pickTranslation(settings?.translations, lang, "about_us") ||
+    resolveVal(settings?.about_us) ||
+    pickTranslation(about?.translations, lang, "about_us") ||
+    resolveVal(about?.about_us) ||
+    resolveVal(about?.description) ||
+    defaultFallback;
 
   return (
     <Shell>
       <div className="ng-page">
-        <SectionHeader eyebrow={isArabic(lang) ? "من نحن" : "About"} title={t(lang, "navAbout")} text={pickTranslation(settings?.translations, lang, "description") || resolveVal(settings?.description) || (isArabic(lang) ? "ألفا ميلك للصناعات الغذائية" : "Alfa Milk Food Industries")} />
-        <section className="ng-surface ng-about-layout">
-          <div>
-            <h2>{resolveVal(settings?.title) || t(lang, "brandName")}</h2>
-            <div dangerouslySetInnerHTML={{ __html: aboutHtml }} className="ng-about-content-html" />
-          </div>
-          <div className="ng-story-card">
-            <strong>{pickTranslation(settings?.translations, lang, "copyright") || resolveVal(settings?.copyright) || (isArabic(lang) ? "جميع الحقوق محفوظة لألفا ميلك ©" : "All rights reserved to Alfa Milk ©")}</strong>
-            <p>{pickTranslation(settings?.translations, lang, "home_meta_description") || resolveVal(settings?.home_meta_description) || (isArabic(lang) ? "نسعى لأن نكون رواداً في صناعة منتجات الألبان بجودة لا تضاهى." : "We strive to be leaders in the dairy industry with unmatched quality.")}</p>
-          </div>
-        </section>
+        {loading ? (
+          <LoadingScreen />
+        ) : (
+          <>
+            <SectionHeader eyebrow={isArabic(lang) ? "من نحن" : "About"} title={t(lang, "navAbout")} text={pickTranslation(settings?.translations, lang, "description") || resolveVal(settings?.description) || (isArabic(lang) ? "ألفا ميلك للصناعات الغذائية" : "Alfa Milk Food Industries")} />
+            <section className="ng-surface ng-about-layout">
+              <div>
+                <h2>{resolveVal(settings?.title) || t(lang, "brandName")}</h2>
+                <div dangerouslySetInnerHTML={{ __html: aboutHtml }} className="ng-about-content-html" />
+              </div>
+              <div className="ng-story-card">
+                <strong>{pickTranslation(settings?.translations, lang, "copyright") || resolveVal(settings?.copyright) || (isArabic(lang) ? "جميع الحقوق محفوظة لألفا ميلك ©" : "All rights reserved to Alfa Milk ©")}</strong>
+                <p>{pickTranslation(settings?.translations, lang, "home_meta_description") || resolveVal(settings?.home_meta_description) || (isArabic(lang) ? "نسعى لأن نكون رواداً في صناعة منتجات الألبان بجودة لا تضاهى." : "We strive to be leaders in the dairy industry with unmatched quality.")}</p>
+              </div>
+            </section>
+          </>
+        )}
       </div>
     </Shell>
   );
@@ -530,7 +539,7 @@ export const ContactPage = () => {
               <p>{meta.address}</p>
               <p>{meta.email}</p>
               {meta.mobiles.map((mobile) => <p key={mobile.id}>{mobile.mobile}</p>)}
-              <div className="ng-social-row">{meta.socials.map((social) => <a key={social.id} href={social.url} target="_blank" rel="noreferrer"><img src={`https://alfamilk.test.do-go.net/images/${social.icon}`} alt="social"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /></a>)}</div>
+              <div className="ng-social-row">{meta.socials.map((social) => <a key={social.id} href={social.url} target="_blank" rel="noreferrer"><img loading="lazy" decoding="async" src={`https://admin.alfa-milk.com/images/${social.icon}`} alt="social"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /></a>)}</div>
             </div>
             <form className="ng-contact-form" onSubmit={handleSubmit}>
               <input value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} placeholder={t(lang, "firstName")} />
