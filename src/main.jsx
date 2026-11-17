@@ -13,6 +13,10 @@ import rootReducer from "./redux/reducers/rootReducer";
 import * as serviceWorker from "./serviceWorker";
 import { getCartItems } from "./redux/actions/cartActions";
 import { getWishlist } from "./redux/actions/wishlistActions";
+import { initGlobalImageProtection } from "./helpers/imageCache";
+
+// Initialize global image caching, retry resilience, and fallback protection
+initGlobalImageProtection();
 
 const store = createStore(
   rootReducer,

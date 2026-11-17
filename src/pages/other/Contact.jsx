@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useState } from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import MetaTags from "react-meta-tags";
@@ -174,7 +174,7 @@ const Contact = ({ strings, currentLanguageCode }) => {
                                 objectFit: "cover",
                                 borderRadius: "50%",
                               }}
-                             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                             onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                           </a>
                         </li>
                       ))}

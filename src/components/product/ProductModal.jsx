@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+﻿import React, { Fragment, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { useToasts } from "react-toast-notifications";
@@ -27,21 +27,21 @@ function ProductModal({
   
   const [quantityCount, setQuantityCount] = useState(1);
 
-  // --- دالة الترجمة الفورية للأوزان ---
+  // --- Ø¯Ø§Ù„Ø© Ø§Ù„ØªØ±Ø¬Ù…Ø© Ø§Ù„ÙÙˆØ±ÙŠØ© Ù„Ù„Ø£ÙˆØ²Ø§Ù† ---
   const formatDisplayWeight = (weightStr) => {
     if (!weightStr) return '';
-    if (currentLanguageCode === 'ar') return weightStr; // لو عربي، اعرضه زي ما هو
+    if (currentLanguageCode === 'ar') return weightStr; // Ù„Ùˆ Ø¹Ø±Ø¨ÙŠØŒ Ø§Ø¹Ø±Ø¶Ù‡ Ø²ÙŠ Ù…Ø§ Ù‡Ùˆ
     
-    // لو إنجليزي، ترجم الكلمات لـ إنجليزي
+    // Ù„Ùˆ Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØŒ ØªØ±Ø¬Ù… Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ù„Ù€ Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ
     return weightStr
       .toString()
-      .replace(/كجم/g, 'kg')
-      .replace(/كيلو/g, 'kg')
-      .replace(/جم/g, 'gm')
-      .replace(/جرام/g, 'gm');
+      .replace(/ÙƒØ¬Ù…/g, 'kg')
+      .replace(/ÙƒÙŠÙ„Ùˆ/g, 'kg')
+      .replace(/Ø¬Ù…/g, 'gm')
+      .replace(/Ø¬Ø±Ø§Ù…/g, 'gm');
   };
 
-  // --- معالجة الأوزان الديناميكية داخل المودال ---
+  // --- Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ø£ÙˆØ²Ø§Ù† Ø§Ù„Ø¯ÙŠÙ†Ø§Ù…ÙŠÙƒÙŠØ© Ø¯Ø§Ø®Ù„ Ø§Ù„Ù…ÙˆØ¯Ø§Ù„ ---
   let parsedVariations = [];
   try {
     if (product?.variations) {
@@ -55,12 +55,12 @@ function ProductModal({
     parsedVariations.length > 0 ? parsedVariations[0] : null
   );
 
-  // حساب السعر والوزن المعروض حالياً بناءً على اختيار العميل
+  // Ø­Ø³Ø§Ø¨ Ø§Ù„Ø³Ø¹Ø± ÙˆØ§Ù„ÙˆØ²Ù† Ø§Ù„Ù…Ø¹Ø±ÙˆØ¶ Ø­Ø§Ù„ÙŠØ§Ù‹ Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„Ø¹Ù…ÙŠÙ„
   const currentBasePrice = selectedVariation ? parseFloat(selectedVariation.price) : parseFloat(product?.price || 0);
   const currentDiscountPrice = product?.discount > 0 ? currentBasePrice - (currentBasePrice * product?.discount) / 100 : currentBasePrice;
   const currentWeight = selectedVariation ? selectedVariation.weight : (currentLanguageCode === "ar" ? product.translations[0]?.weight : product.translations[1]?.weight);
 
-  // تجهيز المنتج للـ Cart
+  // ØªØ¬Ù‡ÙŠØ² Ø§Ù„Ù…Ù†ØªØ¬ Ù„Ù„Ù€ Cart
   const productForCart = {
     ...product,
     price: currentBasePrice,
@@ -114,7 +114,7 @@ function ProductModal({
                     src={product.image_path}
                     className="img-fluid"
                     alt="img"
-                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                   onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@ function ProductModal({
                     : product.translations[1]?.name}
                 </h2>
                 
-                {/* السعر المحدث ديناميكياً */}
+                {/* Ø§Ù„Ø³Ø¹Ø± Ø§Ù„Ù…Ø­Ø¯Ø« Ø¯ÙŠÙ†Ø§Ù…ÙŠÙƒÙŠØ§Ù‹ */}
                 <div className="product-details-price">
                   {product?.discount > 0 ? (
                     <>
@@ -145,16 +145,16 @@ function ProductModal({
                   )}
                 </div>
 
-                {/* عرض تابات اختيار الوزن بدلاً من القائمة المنسدلة */}
+                {/* Ø¹Ø±Ø¶ ØªØ§Ø¨Ø§Øª Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„ÙˆØ²Ù† Ø¨Ø¯Ù„Ø§Ù‹ Ù…Ù† Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ù…Ù†Ø³Ø¯Ù„Ø© */}
                 {parsedVariations.length > 0 && (
                   <div className="pro-details-size-color" style={{ marginBottom: "25px", marginTop: "15px" }}>
                     <div className="pro-details-size">
-                      {/* عنوان يظهر الوزن المختار حالياً مترجم */}
+                      {/* Ø¹Ù†ÙˆØ§Ù† ÙŠØ¸Ù‡Ø± Ø§Ù„ÙˆØ²Ù† Ø§Ù„Ù…Ø®ØªØ§Ø± Ø­Ø§Ù„ÙŠØ§Ù‹ Ù…ØªØ±Ø¬Ù… */}
                       <span style={{ fontWeight: "bold", display: "block", marginBottom: "15px", color: "#333", fontSize: "16px" }}>
-                        {currentLanguageCode === "ar" ? "الوزن:" : "Weight:"} {formatDisplayWeight(selectedVariation?.weight || '')}
+                        {currentLanguageCode === "ar" ? "Ø§Ù„ÙˆØ²Ù†:" : "Weight:"} {formatDisplayWeight(selectedVariation?.weight || '')}
                       </span>
                       
-                      {/* حاوية التابات */}
+                      {/* Ø­Ø§ÙˆÙŠØ© Ø§Ù„ØªØ§Ø¨Ø§Øª */}
                       <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", direction: currentLanguageCode === "en" ? "ltr" : "rtl" }}>
                         {parsedVariations.map((varItem, index) => {
                           const isSelected = selectedVariation?.weight === varItem.weight;
@@ -179,7 +179,7 @@ function ProductModal({
                                 direction: "ltr"
                               }}
                             >
-                              {/* عرض الكلمة مترجمة جوه الزرار */}
+                              {/* Ø¹Ø±Ø¶ Ø§Ù„ÙƒÙ„Ù…Ø© Ù…ØªØ±Ø¬Ù…Ø© Ø¬ÙˆÙ‡ Ø§Ù„Ø²Ø±Ø§Ø± */}
                               {formatDisplayWeight(varItem.weight)}
                             </button>
                           );

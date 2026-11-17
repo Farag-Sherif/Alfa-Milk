@@ -1,4 +1,4 @@
-import axios from "axios";
+﻿import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -34,7 +34,7 @@ const BlogSidebar = ({strings}) => {
                         single?.image_path
                       }
                       alt=""
-                     onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                     onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                   </Link>
                 </div>
                 <div className="sidebar-blog-content">

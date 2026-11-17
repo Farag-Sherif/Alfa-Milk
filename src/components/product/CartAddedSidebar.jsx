@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -7,9 +7,9 @@ import { addToCart, updateQuantity } from "../../redux/actions/cartActions";
 import { useToasts } from "react-toast-notifications";
 import axiosInstance from "../../api/api";
 
-// ─────────────────────────────────────────────
-// مكوّن مستقل لكل منتج مقترح
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ù…ÙƒÙˆÙ‘Ù† Ù…Ø³ØªÙ‚Ù„ Ù„ÙƒÙ„ Ù…Ù†ØªØ¬ Ù…Ù‚ØªØ±Ø­
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const RelatedProductRow = ({
   item,
   itemName,
@@ -52,10 +52,10 @@ const RelatedProductRow = ({
     if (currentLanguageCode === "ar") return w;
     return w
       .toString()
-      .replace(/كجم/g, "kg")
-      .replace(/كيلو/g, "kg")
-      .replace(/جم/g, "gm")
-      .replace(/جرام/g, "gm");
+      .replace(/ÙƒØ¬Ù…/g, "kg")
+      .replace(/ÙƒÙŠÙ„Ùˆ/g, "kg")
+      .replace(/Ø¬Ù…/g, "gm")
+      .replace(/Ø¬Ø±Ø§Ù…/g, "gm");
   };
 
   return (
@@ -78,7 +78,7 @@ const RelatedProductRow = ({
               objectFit: "cover",
               borderRadius: "8px",
             }}
-           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+           onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
         </Link>
 
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -105,13 +105,13 @@ const RelatedProductRow = ({
                 color: "#731b26",
                 fontSize: "13px",
               }}>
-              {finalPrice.toFixed(2)} {strings["EG"] || "ج.م"}
+              {finalPrice.toFixed(2)} {strings["EG"] || "Ø¬.Ù…"}
             </span>
             {item.discount > 0 && (
               <span
                 className="text-muted"
                 style={{ textDecoration: "line-through", fontSize: "11px" }}>
-                {basePrice.toFixed(2)} {strings["EG"] || "ج.م"}
+                {basePrice.toFixed(2)} {strings["EG"] || "Ø¬.Ù…"}
               </span>
             )}
           </div>
@@ -122,7 +122,7 @@ const RelatedProductRow = ({
             handleAddRelatedToCart(item, productForCart, selectedVar)
           }
           disabled={isLoading}
-          title={strings["add_to_cart"] || "أضف للسلة"}
+          title={strings["add_to_cart"] || "Ø£Ø¶Ù Ù„Ù„Ø³Ù„Ø©"}
           style={{
             width: "34px",
             height: "34px",
@@ -194,9 +194,9 @@ const RelatedProductRow = ({
   );
 };
 
-// ─────────────────────────────────────────────
-// مكوّن عرض منتج داخل السلة (للمنتجات المضافة)
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ù…ÙƒÙˆÙ‘Ù† Ø¹Ø±Ø¶ Ù…Ù†ØªØ¬ Ø¯Ø§Ø®Ù„ Ø§Ù„Ø³Ù„Ø© (Ù„Ù„Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ù…Ø¶Ø§ÙØ©)
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
   const itemName =
     currentLanguageCode === "ar"
@@ -212,14 +212,14 @@ const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
       ? basePrice - (basePrice * item.discount) / 100
       : basePrice;
 
-  // جرب كل الأسماء الممكنة للكمية في الـ Redux state
+  // Ø¬Ø±Ø¨ ÙƒÙ„ Ø§Ù„Ø£Ø³Ù…Ø§Ø¡ Ø§Ù„Ù…Ù…ÙƒÙ†Ø© Ù„Ù„ÙƒÙ…ÙŠØ© ÙÙŠ Ø§Ù„Ù€ Redux state
   const qty = item.quantity ?? item.qty ?? item.count ?? item.amount ?? 1;
 
   return (
     <div
       className="d-flex align-items-center py-2 border-bottom"
       style={{ gap: "10px" }}>
-      {/* صورة */}
+      {/* ØµÙˆØ±Ø© */}
       <img
         loading="lazy"
         decoding="async"
@@ -232,9 +232,9 @@ const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
           borderRadius: "8px",
           flexShrink: 0,
         }}
-       onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+       onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
 
-      {/* اسم + وزن */}
+      {/* Ø§Ø³Ù… + ÙˆØ²Ù† */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <p
           style={{
@@ -250,16 +250,16 @@ const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
         </p>
         {item.selectedVariation?.weight && (
           <p style={{ fontSize: "11px", color: "#888", marginBottom: "2px" }}>
-            {currentLanguageCode === "ar" ? "الوزن:" : "Weight:"}{" "}
+            {currentLanguageCode === "ar" ? "Ø§Ù„ÙˆØ²Ù†:" : "Weight:"}{" "}
             <strong>{item.selectedVariation.weight}</strong>
           </p>
         )}
 
-        {/* السعر */}
+        {/* Ø§Ù„Ø³Ø¹Ø± */}
         <div className="d-flex align-items-center" style={{ gap: "5px" }}>
           <span
             style={{ fontSize: "13px", fontWeight: "bold", color: "#731b26" }}>
-            {(discountedPrice * qty).toFixed(2)} {strings["EG"] || "ج.م"}
+            {(discountedPrice * qty).toFixed(2)} {strings["EG"] || "Ø¬.Ù…"}
           </span>
           {item.discount > 0 && (
             <span
@@ -268,13 +268,13 @@ const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
                 color: "#aaa",
                 textDecoration: "line-through",
               }}>
-              {(basePrice * qty).toFixed(2)} {strings["EG"] || "ج.م"}
+              {(basePrice * qty).toFixed(2)} {strings["EG"] || "Ø¬.Ù…"}
             </span>
           )}
         </div>
       </div>
 
-      {/* كنترول الكمية */}
+      {/* ÙƒÙ†ØªØ±ÙˆÙ„ Ø§Ù„ÙƒÙ…ÙŠØ© */}
       <div
         className="d-flex align-items-center"
         style={{
@@ -299,7 +299,7 @@ const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
             justifyContent: "center",
             fontWeight: "bold",
           }}>
-          −
+          âˆ’
         </button>
         <span
           style={{
@@ -332,9 +332,9 @@ const CartItemRow = ({ item, currentLanguageCode, strings, onQtyChange }) => {
   );
 };
 
-// ─────────────────────────────────────────────
-// الـ Sidebar الرئيسي
-// ─────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ø§Ù„Ù€ Sidebar Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠ
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
   const dispatch = useDispatch();
   const { addToast } = useToasts();
@@ -348,7 +348,7 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
       },
   );
 
-  // ✅ جلب كل منتجات السلة من Redux — بنجرب أكتر من مسار ممكن
+  // âœ… Ø¬Ù„Ø¨ ÙƒÙ„ Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ø³Ù„Ø© Ù…Ù† Redux â€” Ø¨Ù†Ø¬Ø±Ø¨ Ø£ÙƒØªØ± Ù…Ù† Ù…Ø³Ø§Ø± Ù…Ù…ÙƒÙ†
   const cartItems = useSelector((state) => {
     const raw =
       state.cartData ??
@@ -356,7 +356,7 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
       state.cart?.items ??
       state.cart ??
       [];
-    // لو Array رجعه مباشرة، لو object جرب نأخذ أول قيمة array جوّاه
+    // Ù„Ùˆ Array Ø±Ø¬Ø¹Ù‡ Ù…Ø¨Ø§Ø´Ø±Ø©ØŒ Ù„Ùˆ object Ø¬Ø±Ø¨ Ù†Ø£Ø®Ø° Ø£ÙˆÙ„ Ù‚ÙŠÙ…Ø© array Ø¬ÙˆÙ‘Ø§Ù‡
     if (Array.isArray(raw)) return raw;
     if (raw && typeof raw === "object") {
       const found = Object.values(raw).find((v) => Array.isArray(v));
@@ -369,7 +369,7 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
 
   const handleClose = () => dispatch({ type: "HIDE_CART_ADDED_SIDEBAR" });
 
-  // ✅ حساب التوتال الكلي لكل منتجات السلة
+  // âœ… Ø­Ø³Ø§Ø¨ Ø§Ù„ØªÙˆØªØ§Ù„ Ø§Ù„ÙƒÙ„ÙŠ Ù„ÙƒÙ„ Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ø³Ù„Ø©
   const cartTotal = cartItems.reduce((sum, item) => {
     const basePrice = item.selectedVariation
       ? parseFloat(item.selectedVariation.price)
@@ -381,13 +381,13 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
     return sum + discountedPrice * (item.quantity || 1);
   }, 0);
 
-  // ✅ تغيير كمية منتج موجود في السلة
+  // âœ… ØªØºÙŠÙŠØ± ÙƒÙ…ÙŠØ© Ù…Ù†ØªØ¬ Ù…ÙˆØ¬ÙˆØ¯ ÙÙŠ Ø§Ù„Ø³Ù„Ø©
   const handleQtyChange = (item, newQty) => {
     if (newQty < 1) return;
     dispatch(updateQuantity(item, addToast, newQty));
   };
 
-  // ✅ إضافة منتج مقترح للسلة
+  // âœ… Ø¥Ø¶Ø§ÙØ© Ù…Ù†ØªØ¬ Ù…Ù‚ØªØ±Ø­ Ù„Ù„Ø³Ù„Ø©
   const handleAddRelatedToCart = async (item, productForCart, selectedVar) => {
     const loadingKey = selectedVar
       ? `${item.id}-${selectedVar.weight}`
@@ -407,7 +407,7 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
 
   if (!show || !addedProduct) return null;
 
-  // إخفاء نفس المنتج الأخير من المقترحات
+  // Ø¥Ø®ÙØ§Ø¡ Ù†ÙØ³ Ø§Ù„Ù…Ù†ØªØ¬ Ø§Ù„Ø£Ø®ÙŠØ± Ù…Ù† Ø§Ù„Ù…Ù‚ØªØ±Ø­Ø§Øª
   const filteredRelated = (relatedProducts || []).filter(
     (item) => item.id !== addedProduct.id,
   );
@@ -448,7 +448,7 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
         {/* Header */}
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h5 className="mb-0" style={{ color: "#2d7a2d" }}>
-            ✓ {strings["added_to_cart"] || "تمت الإضافة إلى السلة"}
+            âœ“ {strings["added_to_cart"] || "ØªÙ…Øª Ø§Ù„Ø¥Ø¶Ø§ÙØ© Ø¥Ù„Ù‰ Ø§Ù„Ø³Ù„Ø©"}
           </h5>
           <button
             onClick={handleClose}
@@ -458,11 +458,11 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
               fontSize: "22px",
               cursor: "pointer",
             }}>
-            ×
+            Ã—
           </button>
         </div>
 
-        {/* ✅ قسم: كل منتجات السلة */}
+        {/* âœ… Ù‚Ø³Ù…: ÙƒÙ„ Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ø³Ù„Ø© */}
         <div
           className="p-3 border rounded mb-3"
           style={{ background: "#fafafa" }}>
@@ -474,7 +474,7 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
               textTransform: "uppercase",
               letterSpacing: "0.5px",
             }}>
-            {strings["cart_items"] || "منتجات السلة"}{" "}
+            {strings["cart_items"] || "Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ø³Ù„Ø©"}{" "}
             <span
               style={{
                 background: "#731b26",
@@ -500,28 +500,28 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
             ))
           ) : (
             <p className="text-muted small text-center py-2">
-              {strings["empty_cart"] || "السلة فارغة"}
+              {strings["empty_cart"] || "Ø§Ù„Ø³Ù„Ø© ÙØ§Ø±ØºØ©"}
             </p>
           )}
         </div>
 
-        {/* ✅ التوتال الكلي لكل السلة */}
+        {/* âœ… Ø§Ù„ØªÙˆØªØ§Ù„ Ø§Ù„ÙƒÙ„ÙŠ Ù„ÙƒÙ„ Ø§Ù„Ø³Ù„Ø© */}
         <div
           className="d-flex justify-content-between align-items-center px-3 py-2 mb-3 rounded"
           style={{ background: "#f0f0f0" }}>
           <span className="fw-bold" style={{ fontSize: "14px" }}>
-            {strings["cart_total"] || "إجمالي السلة"}:
+            {strings["cart_total"] || "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø³Ù„Ø©"}:
           </span>
           <span
             className="fw-bold"
             style={{ color: "#731b26", fontSize: "16px" }}>
-            {cartTotal.toFixed(2)} {strings["EG"] || "ج.م"}
+            {cartTotal.toFixed(2)} {strings["EG"] || "Ø¬.Ù…"}
           </span>
         </div>
 
         <hr style={{ margin: "0 0 12px" }} />
 
-        {/* المنتجات المقترحة */}
+        {/* Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ù…Ù‚ØªØ±Ø­Ø© */}
         <h6
           className="mb-3"
           style={{
@@ -530,7 +530,7 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
             textTransform: "uppercase",
             letterSpacing: "0.5px",
           }}>
-          {strings["complementary_products"] || "منتجات مكملة يُنصح بها:"}
+          {strings["complementary_products"] || "Ù…Ù†ØªØ¬Ø§Øª Ù…ÙƒÙ…Ù„Ø© ÙŠÙÙ†ØµØ­ Ø¨Ù‡Ø§:"}
         </h6>
 
         {filteredRelated.length > 0 ? (
@@ -567,11 +567,11 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
           })
         ) : (
           <p className="text-muted small">
-            {strings["no_related_products"] || "لا توجد منتجات مقترحة"}
+            {strings["no_related_products"] || "Ù„Ø§ ØªÙˆØ¬Ø¯ Ù…Ù†ØªØ¬Ø§Øª Ù…Ù‚ØªØ±Ø­Ø©"}
           </p>
         )}
 
-        {/* أزرار الـ CTA */}
+        {/* Ø£Ø²Ø±Ø§Ø± Ø§Ù„Ù€ CTA */}
         <div
           className="mt-auto pt-3 border-top"
           style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -586,13 +586,13 @@ const CartAddedSidebar = ({ strings, currentLanguageCode, addToCart }) => {
               fontWeight: "bold",
               textAlign: "center",
             }}>
-            {strings["view_cart"] || "عرض السلة"}
+            {strings["view_cart"] || "Ø¹Ø±Ø¶ Ø§Ù„Ø³Ù„Ø©"}
           </Link>
           <button
             className="btn btn-outline-secondary btn-lg"
             onClick={handleClose}
             style={{ borderRadius: "6px" }}>
-            {strings["continue_shopping"] || "متابعة التسوق"}
+            {strings["continue_shopping"] || "Ù…ØªØ§Ø¨Ø¹Ø© Ø§Ù„ØªØ³ÙˆÙ‚"}
           </button>
         </div>
       </div>

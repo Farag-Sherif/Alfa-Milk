@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+﻿import React, { useEffect } from "react";
 import MobileLangCurChange from "./sub-components/MobileLangCurrChange";
 import MobileNavMenu from "./sub-components/MobileNavMenu";
 import { Link } from "react-router-dom";
@@ -78,7 +78,7 @@ const MobileMenu = ({currentLanguageCode}) => {
                       maxWidth: "170px",
                       textAlign: "center"
                     }}
-                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                   onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                 </Link>
               </div>
 

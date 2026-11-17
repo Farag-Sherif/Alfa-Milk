@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+﻿import React, { Fragment } from "react";
 
 const BlogComment = () => {
   return (
@@ -10,7 +10,7 @@ const BlogComment = () => {
             <img
               src={process.env.PUBLIC_URL + "/assets/img/blog/comment-1.jpg"}
               alt=""
-             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+             onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
           </div>
           <div className="blog-comment-content">
             <h4>Anthony Stephens</h4>
@@ -27,7 +27,7 @@ const BlogComment = () => {
             <img
               src={process.env.PUBLIC_URL + "/assets/img/blog/comment-2.jpg"}
               alt=""
-             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+             onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
           </div>
           <div className="blog-comment-content">
             <h4>DX Joxova</h4>

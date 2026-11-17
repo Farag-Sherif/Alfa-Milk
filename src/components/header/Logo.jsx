@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -41,11 +41,11 @@ const Logo = ({ currentLanguageCode, logoClass }) => {
           alt="Logo"
           style={{
             // objectFit: "cover",
-            // Don’t use "!important" in inline styles; it’s ignored.
+            // Donâ€™t use "!important" in inline styles; itâ€™s ignored.
             maxWidth: 100,
             display: "block",
           }}
-         onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+         onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
       </Link>
     </div>
   );

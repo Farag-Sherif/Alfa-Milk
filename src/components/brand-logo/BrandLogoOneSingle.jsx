@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 // !DEL
 const BrandLogoOneSingle = ({ data, sliderClassName, spaceBottomClass }) => {
@@ -8,7 +8,7 @@ const BrandLogoOneSingle = ({ data, sliderClassName, spaceBottomClass }) => {
         spaceBottomClass ? spaceBottomClass : ""
       }`}
     >
-      <img loading="lazy" decoding="async" src={process.env.PUBLIC_URL + data.image} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+      <img loading="lazy" decoding="async" src={process.env.PUBLIC_URL + data.image} alt=""  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
     </div>
   );
 };

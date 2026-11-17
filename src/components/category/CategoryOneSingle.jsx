@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,7 @@ const CategoryOneSingle = ({ data, sliderClass }) => {
   return (
     <div className={`collection-product-2 ${sliderClass ? sliderClass : ""}`}>
       <Link to={process.env.PUBLIC_URL + data.link}>
-        <img loading="lazy" decoding="async" src={process.env.PUBLIC_URL + data.image} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+        <img loading="lazy" decoding="async" src={process.env.PUBLIC_URL + data.image} alt=""  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
       </Link>
       <div className="collection-content-2 text-center">
         <span>{data.subtitle}</span>

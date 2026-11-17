@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+﻿import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
@@ -9,7 +9,7 @@ import {
   deleteFromWishlist,
 } from "../../redux/actions/wishlistActions";
 import ProductModal from "./ProductModal";
-import axiosInstance from "../../api/api"; // ✅ مهم
+import axiosInstance from "../../api/api"; // âœ… Ù…Ù‡Ù…
 
 const ProductGridListSingle = ({
   product,
@@ -22,7 +22,7 @@ const ProductGridListSingle = ({
   strings,
 }) => {
   const [modalShow, setModalShow] = useState(false);
-  const [isAddingToCart, setIsAddingToCart] = useState(false); // ✅ loading state
+  const [isAddingToCart, setIsAddingToCart] = useState(false); // âœ… loading state
   const { addToast } = useToasts();
   const history = useHistory();
   const [isFav, setIsFav] = useState(
@@ -40,7 +40,7 @@ const ProductGridListSingle = ({
     }
   };
 
-  // ✅ الفانكشن الجديدة اللي بتجيب related ثم تضيف للسلة
+  // âœ… Ø§Ù„ÙØ§Ù†ÙƒØ´Ù† Ø§Ù„Ø¬Ø¯ÙŠØ¯Ø© Ø§Ù„Ù„ÙŠ Ø¨ØªØ¬ÙŠØ¨ related Ø«Ù… ØªØ¶ÙŠÙ Ù„Ù„Ø³Ù„Ø©
   const handleAddToCart = async (product, addToast, quantity) => {
     setIsAddingToCart(true);
     try {
@@ -49,7 +49,7 @@ const ProductGridListSingle = ({
       addToCart(product, fetchedRelated, addToast, quantity);
     } catch (error) {
       console.error("Failed to fetch related products:", error);
-      addToCart(product, [], addToast, quantity); // تضيف للسلة حتى لو فشل الـ fetch
+      addToCart(product, [], addToast, quantity); // ØªØ¶ÙŠÙ Ù„Ù„Ø³Ù„Ø© Ø­ØªÙ‰ Ù„Ùˆ ÙØ´Ù„ Ø§Ù„Ù€ fetch
     } finally {
       setIsAddingToCart(false);
     }
@@ -93,7 +93,7 @@ const ProductGridListSingle = ({
                 width={360}
                 height={360}
                 style={{ objectFit: "contain" }}
-               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+               onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
             </Link>
 
             {product.discount ? (
@@ -130,12 +130,12 @@ const ProductGridListSingle = ({
                     className="active">
                     <i className="fa fa-cog"></i>{" "}
                     {currentLanguageCode === "ar"
-                      ? "اختر الوزن"
+                      ? "Ø§Ø®ØªØ± Ø§Ù„ÙˆØ²Ù†"
                       : "Select Option"}
                   </button>
                 ) : product.is_available ? (
                   <button
-                    onClick={() => handleAddToCart(product, addToast, 1)} // ✅ التعديل هنا
+                    onClick={() => handleAddToCart(product, addToast, 1)} // âœ… Ø§Ù„ØªØ¹Ø¯ÙŠÙ„ Ù‡Ù†Ø§
                     className={
                       cartItem !== undefined && cartItem?.quantity > 0
                         ? "active"
@@ -152,7 +152,7 @@ const ProductGridListSingle = ({
                     }>
                     <i className="pe-7s-cart"></i>{" "}
                     {isAddingToCart
-                      ? "..." // ✅ loading
+                      ? "..." // âœ… loading
                       : cartItem !== undefined && cartItem?.quantity > 0
                         ? strings["added"] || "Added"
                         : strings["add_to_cart"] || "Add to cart"}
@@ -237,7 +237,7 @@ const ProductGridListSingle = ({
                       decoding="async"
                       width={360}
                       height={360}
-                     onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                     onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                   </Link>
                   {product.discount ? (
                     <div className="product-img-badges">
@@ -274,7 +274,7 @@ const ProductGridListSingle = ({
                       ? discountedPrice.toFixed(2)
                       : displayPrice.toFixed(2)}{" "}
                     {strings["EG"]}{" "}
-                    {currentLanguageCode === "ar" ? "ج م" : "EGP"}
+                    {currentLanguageCode === "ar" ? "Ø¬ Ù…" : "EGP"}
                   </span>
                 </div>
 
@@ -304,12 +304,12 @@ const ProductGridListSingle = ({
                           border: "none",
                         }}>
                         {currentLanguageCode === "ar"
-                          ? "اختر الوزن"
+                          ? "Ø§Ø®ØªØ± Ø§Ù„ÙˆØ²Ù†"
                           : "Select Option"}
                       </button>
                     ) : product.is_available ? (
                       <button
-                        onClick={() => handleAddToCart(product, addToast, 1)} // ✅ التعديل هنا
+                        onClick={() => handleAddToCart(product, addToast, 1)} // âœ… Ø§Ù„ØªØ¹Ø¯ÙŠÙ„ Ù‡Ù†Ø§
                         className={
                           cartItem !== undefined && cartItem?.quantity > 0
                             ? "active"
@@ -321,7 +321,7 @@ const ProductGridListSingle = ({
                         }>
                         <i className="pe-7s-cart"></i>{" "}
                         {isAddingToCart
-                          ? "..." // ✅ loading
+                          ? "..." // âœ… loading
                           : cartItem !== undefined && cartItem?.quantity > 0
                             ? strings["added"] || "Added"
                             : strings["add_to_cart"] || "Add to cart"}

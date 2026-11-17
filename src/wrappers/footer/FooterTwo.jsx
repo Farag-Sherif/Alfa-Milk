@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -72,7 +72,7 @@ const FooterTwo = ({
                 style={{
                   objectFit: "contain",
                 }}
-               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+               onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
             </Link>
           </div>
           <p>
@@ -95,7 +95,7 @@ const FooterTwo = ({
                         objectFit: "cover",
                         borderRadius: "50%",
                       }}
-                     onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                     onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                   </a>
                 </li>
               ))}
@@ -111,7 +111,7 @@ const FooterTwo = ({
             }`}
           >
             <p>
-              © 2025{" "}
+              Â© 2025{" "}
               <a href="/" rel="noopener noreferrer" target="_blank">
                 {strings["elmoda"]}
               </a>{" "}

@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -84,28 +84,28 @@ const FooterOne = ({
             const translationMap = {
               facebook: {
                 en: "Facebook",
-                ar: "فيسبوك",
+                ar: "ÙÙŠØ³Ø¨ÙˆÙƒ",
               },
               youtube: {
                 en: "YouTube",
-                ar: "يوتيوب",
+                ar: "ÙŠÙˆØªÙŠÙˆØ¨",
               },
               instagram: {
                 en: "Instagram",
-                ar: "إنستغرام",
+                ar: "Ø¥Ù†Ø³ØªØºØ±Ø§Ù…",
               },
               // WhatsApp
               me: {
                 en: "WhatsApp",
-                ar: "واتساب",
+                ar: "ÙˆØ§ØªØ³Ø§Ø¨",
               },
               tiktok: {
                 en: "Tiktok",
-                ar: "تيك توك",
+                ar: "ØªÙŠÙƒ ØªÙˆÙƒ",
               },
               com: {
                 en: "Youtube",
-                ar: "يوتيوب",
+                ar: "ÙŠÙˆØªÙŠÙˆØ¨",
               },
             };
 
@@ -367,7 +367,7 @@ const FooterOne = ({
                               alt={"certificate"}
                               width={80}
                               height={80}
-                             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                             onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                           </a>
                         </div>
                       );
@@ -502,7 +502,7 @@ const FooterOne = ({
                           alt={"certificate"}
                           width={80}
                           height={80}
-                         onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                         onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                       </a>
                     </div>
                   );
@@ -520,7 +520,7 @@ const FooterOne = ({
               <a href="/" rel="noopener noreferrer" target="_blank">
                 {strings["elmoda"]}
               </a>{" "}
-              © 2025{" "}
+              Â© 2025{" "}
             </p>
             <p>
               <a
@@ -530,7 +530,7 @@ const FooterOne = ({
               >
                 Blue Brain
               </a>{" "}
-              © {strings["design_development"]}{" "}
+              Â© {strings["design_development"]}{" "}
             </p>
           </div>
         </div>

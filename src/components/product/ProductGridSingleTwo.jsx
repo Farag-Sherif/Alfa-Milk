@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
@@ -23,7 +23,7 @@ const ProductGridSingleTwo = ({
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
 
-  // قراءة الأوزان
+  // Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„Ø£ÙˆØ²Ø§Ù†
   let parsedVariations = [];
   try {
     if (product?.variations) {
@@ -33,10 +33,10 @@ const ProductGridSingleTwo = ({
 
   const hasVariations = parsedVariations && parsedVariations.length > 0;
   
-  // لو في أوزان، خد سعر أول وزن، لو مفيش خد السعر الأساسي للمنتج
+  // Ù„Ùˆ ÙÙŠ Ø£ÙˆØ²Ø§Ù†ØŒ Ø®Ø¯ Ø³Ø¹Ø± Ø£ÙˆÙ„ ÙˆØ²Ù†ØŒ Ù„Ùˆ Ù…ÙÙŠØ´ Ø®Ø¯ Ø§Ù„Ø³Ø¹Ø± Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ Ù„Ù„Ù…Ù†ØªØ¬
   const displayPrice = hasVariations ? parseFloat(parsedVariations[0].price) : parseFloat(product?.price || 0);
 
-  // حساب الخصومات
+  // Ø­Ø³Ø§Ø¨ Ø§Ù„Ø®ØµÙˆÙ…Ø§Øª
   const getDiscountPrice = (price, discount) => {
     if (!price || !discount) return price;
     return price - (price * discount) / 100;
@@ -53,9 +53,9 @@ const ProductGridSingleTwo = ({
           
           <div className="product-img">
             <Link to={process.env.PUBLIC_URL + "/product/" + product.slug}>
-              <img loading="lazy" decoding="async" className="default-img" src={process.env.PUBLIC_URL + product.image_path} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+              <img loading="lazy" decoding="async" className="default-img" src={process.env.PUBLIC_URL + product.image_path} alt=""  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
               {product.image && product.image.length > 1 && (
-                <img loading="lazy" decoding="async" className="hover-img" src={process.env.PUBLIC_URL + product.image[1]} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                <img loading="lazy" decoding="async" className="hover-img" src={process.env.PUBLIC_URL + product.image[1]} alt=""  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
               )}
             </Link>
             
@@ -72,12 +72,12 @@ const ProductGridSingleTwo = ({
                   <i className="fa fa-shopping-cart"></i>
                 </a>
               ) : hasVariations ? (
-                /* الحل السحري: لو المنتج متعدد الأوزان، الزرار يحولك لصفحة المنتج تختار الوزن */
+                /* Ø§Ù„Ø­Ù„ Ø§Ù„Ø³Ø­Ø±ÙŠ: Ù„Ùˆ Ø§Ù„Ù…Ù†ØªØ¬ Ù…ØªØ¹Ø¯Ø¯ Ø§Ù„Ø£ÙˆØ²Ø§Ù†ØŒ Ø§Ù„Ø²Ø±Ø§Ø± ÙŠØ­ÙˆÙ„Ùƒ Ù„ØµÙØ­Ø© Ø§Ù„Ù…Ù†ØªØ¬ ØªØ®ØªØ§Ø± Ø§Ù„ÙˆØ²Ù† */
                 <Link to={`${process.env.PUBLIC_URL}/product/${product.slug}`} title={strings ? strings["select_option"] : "Select Option"}>
                   <i className="fa fa-cog"></i>
                 </Link>
               ) : product.is_available || (product.stock && product.stock > 0) ? (
-                /* لو المنتج سعر عادي (وزن واحد)، يضيف للسلة مباشرة */
+                /* Ù„Ùˆ Ø§Ù„Ù…Ù†ØªØ¬ Ø³Ø¹Ø± Ø¹Ø§Ø¯ÙŠ (ÙˆØ²Ù† ÙˆØ§Ø­Ø¯)ØŒ ÙŠØ¶ÙŠÙ Ù„Ù„Ø³Ù„Ø© Ù…Ø¨Ø§Ø´Ø±Ø© */
                 <button
                   onClick={() => addToCart(product, addToast, 1)}
                   className={cartItem !== undefined && cartItem.quantity > 0 ? "active" : ""}

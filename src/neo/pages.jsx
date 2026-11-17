@@ -4,6 +4,7 @@ import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import axiosInstance from "../api/api";
+import { handleImageError, handleImageSuccess } from "../helpers/imageCache";
 import { addToCart, deleteAllFromCart, getCartItems } from "../redux/actions/cartActions";
 import { getWishlist, addToWishlist, deleteFromWishlist } from "../redux/actions/wishlistActions";
 import { submitReview } from "../redux/actions/reviewActions";
@@ -124,7 +125,7 @@ export const HomePage = () => {
           <div className="ng-category-grid">
             {categories.slice(0, 6).map((category) => (
               <Link to={`/shop?category=${category.slug}`} className="ng-category-card" key={category.id} style={{ borderRadius: '24px', boxShadow: '0 8px 24px rgba(0,0,0,0.04)' }}>
-                <img loading="lazy" decoding="async" src={category.logo_path} alt={categoryName(category, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                <img loading="lazy" decoding="async" src={category.logo_path} alt={categoryName(category, lang)}  onError={(e) => handleImageError(e)} onLoad={(e) => handleImageSuccess(e)} />
                 <div style={{ flex: 1 }}>
                   <strong>{categoryName(category, lang)}</strong>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '8px', color: 'var(--ng-primary)', fontWeight: 'bold' }}>{isArabic(lang) ? "تصفح" : "Browse"} <span style={{ fontSize: '18px' }}>→</span></span>
@@ -361,7 +362,7 @@ export const ProductPage = () => {
       <div className="ng-page ng-product-page">
         <div className="ng-product-layout">
           <div className="ng-product-gallery">
-            <div className="ng-product-hero-image"><img loading="lazy" decoding="async" src={product?.image_path} alt={productName(product, lang)}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /></div>
+            <div className="ng-product-hero-image"><img loading="lazy" decoding="async" src={product?.image_path} alt={productName(product, lang)}  onError={(e) => handleImageError(e)} onLoad={(e) => handleImageSuccess(e)} /></div>
             <div className="ng-product-mini-info">
               <div>
                 <span>{t(lang, "overview")}</span>
@@ -434,7 +435,7 @@ export const BlogDetailPage = () => {
   }, [id]);
   const title = pickTranslation(post?.translations, lang, "title") || post?.title;
   const html = pickTranslation(post?.translations, lang, "content") || post?.content || "";
-  return <Shell><div className="ng-page">{loading ? <LoadingScreen /> : <article className="ng-article-shell"><img loading="lazy" decoding="async" src={post?.image_path} alt={title}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /><span className="ng-eyebrow">{formatDate(post?.created_at, lang)}</span><h1>{title}</h1><div className="ng-article-content" dangerouslySetInnerHTML={{ __html: html }} /></article>}</div></Shell>;
+  return <Shell><div className="ng-page">{loading ? <LoadingScreen /> : <article className="ng-article-shell"><img loading="lazy" decoding="async" src={post?.image_path} alt={title}  onError={(e) => handleImageError(e)} onLoad={(e) => handleImageSuccess(e)} /><span className="ng-eyebrow">{formatDate(post?.created_at, lang)}</span><h1>{title}</h1><div className="ng-article-content" dangerouslySetInnerHTML={{ __html: html }} /></article>}</div></Shell>;
 };
 
 export const AboutPage = () => {
@@ -539,7 +540,7 @@ export const ContactPage = () => {
               <p>{meta.address}</p>
               <p>{meta.email}</p>
               {meta.mobiles.map((mobile) => <p key={mobile.id}>{mobile.mobile}</p>)}
-              <div className="ng-social-row">{meta.socials.map((social) => <a key={social.id} href={social.url} target="_blank" rel="noreferrer"><img loading="lazy" decoding="async" src={`https://admin.alfa-milk.com/images/${social.icon}`} alt="social"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} /></a>)}</div>
+              <div className="ng-social-row">{meta.socials.map((social) => <a key={social.id} href={social.url} target="_blank" rel="noreferrer"><img loading="lazy" decoding="async" src={`https://admin.alfa-milk.com/images/${social.icon}`} alt="social"  onError={(e) => handleImageError(e)} onLoad={(e) => handleImageSuccess(e)} /></a>)}</div>
             </div>
             <form className="ng-contact-form" onSubmit={handleSubmit}>
               <input value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} placeholder={t(lang, "firstName")} />

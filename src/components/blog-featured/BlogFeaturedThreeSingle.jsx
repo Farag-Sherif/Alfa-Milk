@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -20,7 +20,7 @@ const BlogFeaturedThreeSingle = ({
                   ? singlePost.translations[0].title
                   : singlePost.translations[1].title
               }
-             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+             onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
           </Link>
         </div>
         <div className="blog-content-2">

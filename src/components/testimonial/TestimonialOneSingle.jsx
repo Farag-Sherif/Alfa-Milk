@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 import defaultImg from "../../assets/img/user.png";
 import { multilanguage } from "redux-multilanguage";
@@ -11,7 +11,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
       <span
         key={i}
         style={{ color: i < rating ? "#f5a623" : "#ddd", fontSize: "20px" }}>
-        ★
+        â˜…
       </span>
     ));
   };
@@ -48,7 +48,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
         boxShadow: "0 2px 16px rgba(0,0,0,0.09)",
         fontFamily: isArabic ? "'Cairo', sans-serif" : "'Poppins', sans-serif",
       }}>
-      {/* صورة المنتج في الأعلى */}
+      {/* ØµÙˆØ±Ø© Ø§Ù„Ù…Ù†ØªØ¬ ÙÙŠ Ø§Ù„Ø£Ø¹Ù„Ù‰ */}
       <div
         style={{
           width: "100%",
@@ -61,7 +61,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
             src={productImage}
             alt={productName || "product"}
             style={{ width: "100%", height: "100%", objectFit: "contain" }}
-           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+           onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
         ) : (
           <div
             style={{
@@ -73,14 +73,14 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
               justifyContent: "center",
               fontSize: "48px",
             }}>
-            ☕
+            â˜•
           </div>
         )}
       </div>
 
-      {/* محتوى البطاقة */}
+      {/* Ù…Ø­ØªÙˆÙ‰ Ø§Ù„Ø¨Ø·Ø§Ù‚Ø© */}
       <div style={{ padding: "16px" }}>
-        {/* اسم المستخدم + Verified */}
+        {/* Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… + Verified */}
         <div
           style={{
             display: "flex",
@@ -98,7 +98,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
               objectFit: "cover",
               border: "2px solid #c8a96e",
             }}
-           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+           onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
           <div>
             <div
               style={{
@@ -122,7 +122,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
                   padding: "2px 8px",
                   borderRadius: "20px",
                 }}>
-                ✔ {isArabic ? "موثق" : "Verified"}
+                âœ” {isArabic ? "Ù…ÙˆØ«Ù‚" : "Verified"}
               </span>
             </div>
             <p style={{ fontSize: "12px", color: "#999", margin: "2px 0 0" }}>
@@ -131,12 +131,12 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
           </div>
         </div>
 
-        {/* النجوم */}
+        {/* Ø§Ù„Ù†Ø¬ÙˆÙ… */}
         <div style={{ margin: "10px 0 6px" }}>
           {renderStars(data.rate || 5)}
         </div>
 
-        {/* نص الريفيو */}
+        {/* Ù†Øµ Ø§Ù„Ø±ÙŠÙÙŠÙˆ */}
         <p
           style={{
             fontSize: "14px",
@@ -151,7 +151,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
           {data.review}
         </p>
 
-        {/* اسم المنتج في الأسفل */}
+        {/* Ø§Ø³Ù… Ø§Ù„Ù…Ù†ØªØ¬ ÙÙŠ Ø§Ù„Ø£Ø³ÙÙ„ */}
         {productName && (
           <div
             style={{
@@ -172,7 +172,7 @@ const TestimonialOneSingle = ({ data, sliderClass, currentLanguageCode }) => {
                   borderRadius: "8px",
                   border: "1px solid #eee",
                 }}
-               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+               onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
             )}
             <span style={{ fontSize: "12px", color: "#777" }}>
               {productName}

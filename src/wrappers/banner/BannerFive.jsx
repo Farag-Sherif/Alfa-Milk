@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
 import axiosInstance from "../../api/api";
 
-// Helper: extract local path from full URL (e.g. "https://omdacoffee.com/shop?category=x" → "/shop?category=x")
+// Helper: extract local path from full URL (e.g. "https://omdacoffee.com/shop?category=x" â†’ "/shop?category=x")
 const getLocalPath = (url) => {
   try {
     const parsed = new URL(url);
@@ -55,7 +55,7 @@ const BannerFive = ({ strings, currentLanguageCode }) => {
                   <div className="col-lg-12" key={el.id}>
                     <div className="single-banner mb-20">
                       <Link to={getLocalPath(el?.url)}>
-                        <img src={el.image_path} alt="Banner" loading="lazy" decoding="async"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                        <img src={el.image_path} alt="Banner" loading="lazy" decoding="async"  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                       </Link>
                       <div className="banner-content-3 banner-position-hm15-1">
                         <h3>
@@ -87,7 +87,7 @@ const BannerFive = ({ strings, currentLanguageCode }) => {
                     alt="Banner"
                     loading="lazy"
                     decoding="async"
-                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                   onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                 </Link>
                 <div className="banner-content-4 banner-position-hm15-2">
                   <span>
@@ -119,7 +119,7 @@ const BannerFive = ({ strings, currentLanguageCode }) => {
                   <div className="col-lg-12 col-md-6" key={el.id}>
                     <div className="single-banner mb-20">
                       <Link to={getLocalPath(el?.url)}>
-                        <img src={el.image_path} alt="Banner" loading="lazy" decoding="async"  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                        <img src={el.image_path} alt="Banner" loading="lazy" decoding="async"  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                       </Link>
                       <div className="banner-content-3 banner-position-hm15-2">
                         <h3>

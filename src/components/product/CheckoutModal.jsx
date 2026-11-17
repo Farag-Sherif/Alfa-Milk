@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+﻿import React, { Fragment, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useToasts } from "react-toast-notifications";
@@ -49,7 +49,7 @@ function CheckoutModal({
       });
   }, []);
 
-  // ✅ جلب free_delivery_at من الـ settings
+  // âœ… Ø¬Ù„Ø¨ free_delivery_at Ù…Ù† Ø§Ù„Ù€ settings
   useEffect(() => {
     axiosInstance
       .get("/settings")
@@ -95,7 +95,7 @@ function CheckoutModal({
     }
   }, [selectedAddress, cities, addresses]);
 
-  // ✅ حساب إجمالي السلة
+  // âœ… Ø­Ø³Ø§Ø¨ Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø³Ù„Ø©
   const cartTotalPrice =
     products?.reduce((total, product) => {
       const qty =
@@ -110,7 +110,7 @@ function CheckoutModal({
       return total + (price - (price * discount) / 100) * qty;
     }, 0) || 0;
 
-  // ✅ هل الشحن مجاني؟
+  // âœ… Ù‡Ù„ Ø§Ù„Ø´Ø­Ù† Ù…Ø¬Ø§Ù†ÙŠØŸ
   const isFreeShipping =
     freeDeliveryAt !== null && cartTotalPrice >= freeDeliveryAt;
   const lastTax = isFreeShipping ? 0 : parseFloat(deliveryFees || 0);
@@ -171,15 +171,15 @@ function CheckoutModal({
       };
     });
 
-    // ✅ مزامنة المنتجات مع سلة الباك إند قبل الـ checkout
-    // عشان لو المستخدم ضغط "اطلب الآن" من غير ما يضيف للسلة الأول
-    // أو لو السلة اتمسحت بعد طلب سابق
+    // âœ… Ù…Ø²Ø§Ù…Ù†Ø© Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ù…Ø¹ Ø³Ù„Ø© Ø§Ù„Ø¨Ø§Ùƒ Ø¥Ù†Ø¯ Ù‚Ø¨Ù„ Ø§Ù„Ù€ checkout
+    // Ø¹Ø´Ø§Ù† Ù„Ùˆ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø¶ØºØ· "Ø§Ø·Ù„Ø¨ Ø§Ù„Ø¢Ù†" Ù…Ù† ØºÙŠØ± Ù…Ø§ ÙŠØ¶ÙŠÙ Ù„Ù„Ø³Ù„Ø© Ø§Ù„Ø£ÙˆÙ„
+    // Ø£Ùˆ Ù„Ùˆ Ø§Ù„Ø³Ù„Ø© Ø§ØªÙ…Ø³Ø­Øª Ø¨Ø¹Ø¯ Ø·Ù„Ø¨ Ø³Ø§Ø¨Ù‚
     if (localStorage.getItem("authToken")) {
       try {
-        // أول حاجة نمسح السلة القديمة عشان نتجنب تكرار المنتجات
+        // Ø£ÙˆÙ„ Ø­Ø§Ø¬Ø© Ù†Ù…Ø³Ø­ Ø§Ù„Ø³Ù„Ø© Ø§Ù„Ù‚Ø¯ÙŠÙ…Ø© Ø¹Ø´Ø§Ù† Ù†ØªØ¬Ù†Ø¨ ØªÙƒØ±Ø§Ø± Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª
         await axiosInstance.post("/remove-all-cart");
 
-        // نضيف كل المنتجات لسلة الباك إند
+        // Ù†Ø¶ÙŠÙ ÙƒÙ„ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ù„Ø³Ù„Ø© Ø§Ù„Ø¨Ø§Ùƒ Ø¥Ù†Ø¯
         for (const item of cartData) {
           await axiosInstance.post("/add-to-cart", {
             item_id: item.item_id,
@@ -189,7 +189,7 @@ function CheckoutModal({
         }
       } catch (error) {
         console.error("Failed to sync cart with backend:", error);
-        // نكمل الـ checkout حتى لو فشلت المزامنة - الباك إند ممكن يقبل inline cart
+        // Ù†ÙƒÙ…Ù„ Ø§Ù„Ù€ checkout Ø­ØªÙ‰ Ù„Ùˆ ÙØ´Ù„Øª Ø§Ù„Ù…Ø²Ø§Ù…Ù†Ø© - Ø§Ù„Ø¨Ø§Ùƒ Ø¥Ù†Ø¯ Ù…Ù…ÙƒÙ† ÙŠÙ‚Ø¨Ù„ inline cart
       }
     }
 
@@ -198,7 +198,7 @@ function CheckoutModal({
     // If user is logged in and wants a new address, try to create it
     if (user && !selectedAddress) {
       if (!formData.fName || !formData.phone || !formData.city || !formData.street) {
-        addToast(strings["fill_required_fields"] || "الرجاء ملء جميع الحقول المطلوبة", { appearance: "error" });
+        addToast(strings["fill_required_fields"] || "Ø§Ù„Ø±Ø¬Ø§Ø¡ Ù…Ù„Ø¡ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ„ Ø§Ù„Ù…Ø·Ù„ÙˆØ¨Ø©", { appearance: "error" });
         return;
       }
       
@@ -210,7 +210,7 @@ function CheckoutModal({
           phone: formData.phone,
           country: formData.country,
           city: formData.city,
-          zip: formData.zip || "00000", // ✅ قيمة افتراضية لو المستخدم مكتبش رمز بريدي
+          zip: formData.zip || "00000", // âœ… Ù‚ÙŠÙ…Ø© Ø§ÙØªØ±Ø§Ø¶ÙŠØ© Ù„Ùˆ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ù…ÙƒØªØ¨Ø´ Ø±Ù…Ø² Ø¨Ø±ÙŠØ¯ÙŠ
           street: formData.street,
           notes: formData.notes,
           type: "cod",
@@ -221,13 +221,13 @@ function CheckoutModal({
           setAddresses((prev) => [...prev, addressResponse.data.address]);
           setSelectedAddress(finalAddressId);
         } else {
-          // ✅ لو فشل إنشاء العنوان، نكمل الـ checkout ببيانات العنوان inline
+          // âœ… Ù„Ùˆ ÙØ´Ù„ Ø¥Ù†Ø´Ø§Ø¡ Ø§Ù„Ø¹Ù†ÙˆØ§Ù†ØŒ Ù†ÙƒÙ…Ù„ Ø§Ù„Ù€ checkout Ø¨Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø¹Ù†ÙˆØ§Ù† inline
           console.warn("Address creation returned non-success, proceeding with inline address data");
           finalAddressId = null;
         }
       } catch (error) {
         console.error("Failed to add new address:", error);
-        // ✅ بدل ما نوقف الـ checkout، نكمل ببيانات العنوان inline (زي الـ guest)
+        // âœ… Ø¨Ø¯Ù„ Ù…Ø§ Ù†ÙˆÙ‚Ù Ø§Ù„Ù€ checkoutØŒ Ù†ÙƒÙ…Ù„ Ø¨Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø¹Ù†ÙˆØ§Ù† inline (Ø²ÙŠ Ø§Ù„Ù€ guest)
         console.warn("Address creation failed, falling back to inline address checkout");
         finalAddressId = null;
       }
@@ -257,21 +257,21 @@ function CheckoutModal({
       if (response.data.status === "success") {
         const successMsg =
           strings["Checkoutsuccessful"] ||
-          "تم إتمام الطلب بنجاح! | Order placed successfully!";
+          "ØªÙ… Ø¥ØªÙ…Ø§Ù… Ø§Ù„Ø·Ù„Ø¨ Ø¨Ù†Ø¬Ø§Ø­! | Order placed successfully!";
         addToast(successMsg, { appearance: "success" });
-        dispatch(deleteAllFromCart()); // بدون toast عشان مش عايزين رسالة "تم إفراغ السلة" بعد نجاح الطلب
+        dispatch(deleteAllFromCart()); // Ø¨Ø¯ÙˆÙ† toast Ø¹Ø´Ø§Ù† Ù…Ø´ Ø¹Ø§ÙŠØ²ÙŠÙ† Ø±Ø³Ø§Ù„Ø© "ØªÙ… Ø¥ÙØ±Ø§Øº Ø§Ù„Ø³Ù„Ø©" Ø¨Ø¹Ø¯ Ù†Ø¬Ø§Ø­ Ø§Ù„Ø·Ù„Ø¨
         onHide();
       } else {
         const errorMsg =
           strings["Checkoutwasnotsuccessful"] ||
-          "حدث خطأ أثناء الطلب | Checkout failed";
+          "Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„Ø·Ù„Ø¨ | Checkout failed";
         addToast(errorMsg, { appearance: "error" });
       }
     } catch (error) {
       console.error("Checkout failed", error);
       const catchMsg =
         strings["Checkoutfailed"] ||
-        "فشل الاتصال بالسيرفر | Server error";
+        "ÙØ´Ù„ Ø§Ù„Ø§ØªØµØ§Ù„ Ø¨Ø§Ù„Ø³ÙŠØ±ÙØ± | Server error";
       addToast(catchMsg, { appearance: "error" });
     }
   };
@@ -309,7 +309,7 @@ function CheckoutModal({
                     width={100}
                     height={100}
                     className="rounded"
-                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                   onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                   <p>
                     {currentLanguageCode === "ar"
                       ? el.translations[0]?.name
@@ -326,7 +326,7 @@ function CheckoutModal({
               <div className="checkout-modal-content p-3">
                 {user && addresses.length > 0 && (
                   <div className="mb-4">
-                    <p className="fw-bold mb-3">{strings["chose_address"] || "اختر عنوان"}</p>
+                    <p className="fw-bold mb-3">{strings["chose_address"] || "Ø§Ø®ØªØ± Ø¹Ù†ÙˆØ§Ù†"}</p>
                     {addresses.map((address) => (
                       <div className="address-item mb-2 d-flex align-items-center" key={address.id}>
                         <input
@@ -362,7 +362,7 @@ function CheckoutModal({
                         className="address-label mb-0 fw-bold"
                         style={{ marginInlineStart: '8px' }}
                       >
-                        {strings["add_new_address"] || "إضافة عنوان جديد"}
+                        {strings["add_new_address"] || "Ø¥Ø¶Ø§ÙØ© Ø¹Ù†ÙˆØ§Ù† Ø¬Ø¯ÙŠØ¯"}
                       </label>
                     </div>
                   </div>
@@ -462,7 +462,7 @@ function CheckoutModal({
                 )}
 
                 <div className="mb-4">
-                  <p className="fw-bold mb-3">{strings["order_notes"] || "ملاحظات الطلب"}</p>
+                  <p className="fw-bold mb-3">{strings["order_notes"] || "Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø§Ù„Ø·Ù„Ø¨"}</p>
                   <div className="mb-3">
                     <textarea
                       name="notes"
@@ -482,7 +482,7 @@ function CheckoutModal({
                     <span>
                       {isFreeShipping ? (
                         <span style={{ color: "#2d7a2d", fontWeight: "bold" }}>
-                          {strings["free_shipping"] || "شحن مجاني 🎉"}
+                          {strings["free_shipping"] || "Ø´Ø­Ù† Ù…Ø¬Ø§Ù†ÙŠ ðŸŽ‰"}
                         </span>
                       ) : (
                         <>

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+﻿import React, { Fragment } from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import MetaTags from "react-meta-tags";
 import { connect } from "react-redux";
@@ -24,7 +24,7 @@ const Wishlist = ({
 }) => {
   const { addToast } = useToasts();
   const { pathname } = location;
-  const history = useHistory(); // هنستخدمها عشان نوجه العميل لصفحة المنتج لو متعدد الأوزان
+  const history = useHistory(); // Ù‡Ù†Ø³ØªØ®Ø¯Ù…Ù‡Ø§ Ø¹Ø´Ø§Ù† Ù†ÙˆØ¬Ù‡ Ø§Ù„Ø¹Ù…ÙŠÙ„ Ù„ØµÙØ­Ø© Ø§Ù„Ù…Ù†ØªØ¬ Ù„Ùˆ Ù…ØªØ¹Ø¯Ø¯ Ø§Ù„Ø£ÙˆØ²Ø§Ù†
 
   return (
     <Fragment>
@@ -71,7 +71,7 @@ const Wishlist = ({
                         <tbody>
                           {wishlistItems.map((wishlistItem, key) => {
                             
-                            // --- فحص الأوزان لكل منتج في الرغبات ---
+                            // --- ÙØ­Øµ Ø§Ù„Ø£ÙˆØ²Ø§Ù† Ù„ÙƒÙ„ Ù…Ù†ØªØ¬ ÙÙŠ Ø§Ù„Ø±ØºØ¨Ø§Øª ---
                             let parsedVariations = [];
                             try {
                               if (wishlistItem?.variations) {
@@ -81,9 +81,9 @@ const Wishlist = ({
                             
                             const hasVariations = parsedVariations && parsedVariations.length > 0;
                             
-                            // تحديد السعر اللي هيتعرض
+                            // ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ø³Ø¹Ø± Ø§Ù„Ù„ÙŠ Ù‡ÙŠØªØ¹Ø±Ø¶
                             const displayPrice = hasVariations 
-                                ? (currentLanguageCode === "ar" ? "متعدد الأوزان" : "Multiple Weights")
+                                ? (currentLanguageCode === "ar" ? "Ù…ØªØ¹Ø¯Ø¯ Ø§Ù„Ø£ÙˆØ²Ø§Ù†" : "Multiple Weights")
                                 : (wishlistItem?.price + " " + (strings["EG"] || "EG"));
 
                             return (
@@ -102,7 +102,7 @@ const Wishlist = ({
                                         wishlistItem?.image_path || "/deal.png"
                                       }
                                       alt="ITEMS"
-                                     onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                                     onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                                   </Link>
                                 </td>
 
@@ -121,7 +121,7 @@ const Wishlist = ({
                                   </Link>
                                 </td>
 
-                                {/* عرض السعر المعدل */}
+                                {/* Ø¹Ø±Ø¶ Ø§Ù„Ø³Ø¹Ø± Ø§Ù„Ù…Ø¹Ø¯Ù„ */}
                                 <td className="product-price-cart">
                                   <span style={{ fontWeight: hasVariations ? "normal" : "bold", color: hasVariations ? "#888" : "#333" }}>
                                     {displayPrice}
@@ -130,16 +130,16 @@ const Wishlist = ({
 
                                 <td className="product-wishlist-cart">
                                   {hasVariations ? (
-                                    // زرار "اختر الوزن" لو المنتج متعدد الأوزان
+                                    // Ø²Ø±Ø§Ø± "Ø§Ø®ØªØ± Ø§Ù„ÙˆØ²Ù†" Ù„Ùˆ Ø§Ù„Ù…Ù†ØªØ¬ Ù…ØªØ¹Ø¯Ø¯ Ø§Ù„Ø£ÙˆØ²Ø§Ù†
                                     <button
                                       onClick={() => history.push(process.env.PUBLIC_URL + "/product/" + wishlistItem?.slug)}
                                       className="active"
                                       style={{ backgroundColor: "#731b26", color: "#fff", border: "none" }}
                                     >
-                                      {currentLanguageCode === "ar" ? "اختر الوزن" : "Select Option"}
+                                      {currentLanguageCode === "ar" ? "Ø§Ø®ØªØ± Ø§Ù„ÙˆØ²Ù†" : "Select Option"}
                                     </button>
                                   ) : (
-                                    // زرار "أضف للسلة" العادي لو المنتج ملوش أوزان
+                                    // Ø²Ø±Ø§Ø± "Ø£Ø¶Ù Ù„Ù„Ø³Ù„Ø©" Ø§Ù„Ø¹Ø§Ø¯ÙŠ Ù„Ùˆ Ø§Ù„Ù…Ù†ØªØ¬ Ù…Ù„ÙˆØ´ Ø£ÙˆØ²Ø§Ù†
                                     <button
                                       onClick={() =>
                                         addToCart(wishlistItem, addToast)

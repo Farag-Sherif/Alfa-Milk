@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -9,7 +9,7 @@ const BlogFeaturedSingle = ({ singlePost, currentLanguageCode }) => {
       <div className="blog-wrap mb-30 scroll-zoom">
         <div className="blog-img">
           <Link to={`/post/${singlePost.id}`}>
-            <img loading="lazy" decoding="async" src={singlePost.image_path} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+            <img loading="lazy" decoding="async" src={singlePost.image_path} alt=""  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
           </Link>
         </div>
         <div className="blog-content-wrap">

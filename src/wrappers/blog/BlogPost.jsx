@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -19,7 +19,7 @@ const BlogPost = ({ data, currentLanguageCode, strings }) => {
                 ? data?.item?.translations[0].title
                 : data?.item?.translations[1].title
             }
-           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+           onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
         </div>
         <div
           className={`blog-details-content ${

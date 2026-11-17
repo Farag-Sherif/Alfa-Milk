@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 // !DEL
 const FeatureIconFourSingle = ({ data, spaceBottomClass, colClass }) => {
@@ -17,7 +17,7 @@ const FeatureIconFourSingle = ({ data, spaceBottomClass, colClass }) => {
             marginTop: "50px",
             marginBottom: "50px"
           }}
-         onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+         onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
       </div>
     </div>
   );

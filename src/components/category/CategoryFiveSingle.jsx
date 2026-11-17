@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const CategoryFiveSingle = ({ data }) => {
               src={process.env.PUBLIC_URL + data.image}
               alt=""
               className="img-fluid"
-             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+             onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
           </Link>
         </div>
         <div className="category-grid__content">

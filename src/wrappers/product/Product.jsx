@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
@@ -96,14 +96,14 @@ const Product = ({ product, currentLanguageCode, strings }) => {
               src={product.image_path}
               alt={product.name}
               loading="lazy"
-             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+             onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
             {product.image && product.image.length > 1 && (
               <img
                 className="hover-img img-fluid"
                 src={product.image_path}
                 alt={product.name}
                 loading="lazy"
-               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+               onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
             )}
           </Link>
 
@@ -117,7 +117,7 @@ const Product = ({ product, currentLanguageCode, strings }) => {
 
           <div className="product-action-2">
             {hasVariations ? (
-              // Product has variations → Go to product page to choose weight
+              // Product has variations â†’ Go to product page to choose weight
               <Link
                 to={`${process.env.PUBLIC_URL}/product/${product.slug}`}
                 title={strings?.select_option || "Select Option"}
@@ -135,7 +135,7 @@ const Product = ({ product, currentLanguageCode, strings }) => {
                 <i className="fa fa-cog"></i>
               </Link>
             ) : product.is_available ? (
-              // Single variant + available → Add to cart directly
+              // Single variant + available â†’ Add to cart directly
               <button onClick={handleAddToCartClick} title="Add to cart">
                 <i className="fa fa-shopping-cart"></i>
               </button>

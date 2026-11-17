@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+﻿import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
 
@@ -9,7 +9,7 @@ const BlogPostsNoSidebar = ({ currentLanguageCode, singlePost, strings }) => {
         <div className="blog-wrap-2 mb-30">
           <div className="blog-img-2">
             <Link to={`/post?postId=${singlePost.id}`}>
-              <img src={singlePost.image_path} alt=""  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+              <img src={singlePost.image_path} alt=""  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
             </Link>
           </div>
           <div className="blog-content-2">

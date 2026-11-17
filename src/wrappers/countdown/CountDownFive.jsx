@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import Countdown from "react-countdown-now";
@@ -39,7 +39,7 @@ const CountDownFive = ({
                 src={process.env.PUBLIC_URL + image}
                 alt=""
                 className="img-fluid"
-               onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+               onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
             </div>
           </div>
         </div>

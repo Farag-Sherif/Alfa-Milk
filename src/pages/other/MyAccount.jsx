@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
@@ -341,7 +341,7 @@ console.log(user);
                                                   src={`https://admin.alfa-milk.com/images/${item.image}`}
                                                   alt={item.name}
                                                   className="img-fluid rounded shadow-sm"
-                                                 onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                                                 onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                                               </div>
                                               <div className="col-9 col-md-4">
                                                 <div className="small text-muted">

@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import { multilanguage } from "redux-multilanguage";
@@ -35,7 +35,7 @@ const MenuCart = ({
                         alt={single.name}
                         src={single.image_path}
                         className="img-fluid"
-                       onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                       onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                     </Link>
                   </div>
                   <div className="shopping-cart-title">

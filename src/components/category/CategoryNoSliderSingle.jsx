@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -18,7 +18,7 @@ const CategoryNoSliderSingle = ({
       <Link
         to={`/shop?category=${data.slug}`}
         style={{ textDecoration: "none", textAlign: "center" }}>
-        {/* الدائرة مع الصورة تطلع للأعلى */}
+        {/* Ø§Ù„Ø¯Ø§Ø¦Ø±Ø© Ù…Ø¹ Ø§Ù„ØµÙˆØ±Ø© ØªØ·Ù„Ø¹ Ù„Ù„Ø£Ø¹Ù„Ù‰ */}
         <div
           style={{
             width: "160px",
@@ -45,16 +45,16 @@ const CategoryNoSliderSingle = ({
               height: "180px",
               objectFit: "contain",
               position: "absolute",
-              bottom: "20px" /* الصورة تطلع للأعلى */,
+              bottom: "20px" /* Ø§Ù„ØµÙˆØ±Ø© ØªØ·Ù„Ø¹ Ù„Ù„Ø£Ø¹Ù„Ù‰ */,
               left: "50%",
               transform: "translateX(-50%)",
               filter: "drop-shadow(0px 8px 10px rgba(0,0,0,0.2))",
             }}
-            onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }}
+            onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }}
           />
         </div>
 
-        {/* اسم القسم */}
+        {/* Ø§Ø³Ù… Ø§Ù„Ù‚Ø³Ù… */}
         <p
           style={{
             marginTop: "15px",

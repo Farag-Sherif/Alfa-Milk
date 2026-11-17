@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+﻿import React, { Fragment } from "react";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import MetaTags from "react-meta-tags";
 import { connect, useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ import {
 } from "../../redux/actions/cartActions";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const cartStyles = `
   @media (max-width: 767px) {
     .cart-table-content,
@@ -126,7 +126,7 @@ const cartStyles = `
   }
 `;
 
-// ─── Cart Page ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Cart Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const Cart = ({
   location,
   deleteAllFromCart,
@@ -174,7 +174,7 @@ const Cart = ({
                   {strings["CART_PAGE_TITLE"]}
                 </h3>
 
-                {/* ── DESKTOP table ── */}
+                {/* â”€â”€ DESKTOP table â”€â”€ */}
                 <div className="row">
                   <div className="col-12">
                     <div className="table-content table-responsive cart-table-content">
@@ -203,7 +203,7 @@ const Cart = ({
                   </div>
                 </div>
 
-                {/* ── MOBILE card list ── */}
+                {/* â”€â”€ MOBILE card list â”€â”€ */}
                 <div className="cart-mobile-list">
                   {cartItems?.items?.map((cartItem) => (
                     <MobileCard
@@ -218,32 +218,32 @@ const Cart = ({
                     <div className="cart-mobile-summary__row" dir={currentLanguageCode === "ar" ? "rtl" : "ltr"}>
                       <div>
                         <div className="cart-mobile-summary__title" style={{ textAlign: currentLanguageCode === "ar" ? "right" : "left" }}>
-                          {strings["CART_GRAND_TOTAL"] || "المجموع الفرعي"}
+                          {strings["CART_GRAND_TOTAL"] || "Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹ Ø§Ù„ÙØ±Ø¹ÙŠ"}
                         </div>
                         <div className="cart-mobile-summary__note">
                           {strings["CART_TAX_NOTE"] ||
-                            "شاملة الضريبة. يتم حساب الشحن عند الدفع."}
+                            "Ø´Ø§Ù…Ù„Ø© Ø§Ù„Ø¶Ø±ÙŠØ¨Ø©. ÙŠØªÙ… Ø­Ø³Ø§Ø¨ Ø§Ù„Ø´Ø­Ù† Ø¹Ù†Ø¯ Ø§Ù„Ø¯ÙØ¹."}
                         </div>
                       </div>
                       <div className="cart-mobile-summary__amount">
                         {cartTotalPrice.toFixed(2)}{" "}
-                        {currentLanguageCode === "ar" ? "ج.م" : "L.E"}
+                        {currentLanguageCode === "ar" ? "Ø¬.Ù…" : "L.E"}
                       </div>
                     </div>
                     <Link
                       to={process.env.PUBLIC_URL + "/checkout"}
                       className="cart-mobile-checkout">
-                      {strings["CART_PROCEED_TO_CHECKOUT"] || "إتمام الشراء"}
+                      {strings["CART_PROCEED_TO_CHECKOUT"] || "Ø¥ØªÙ…Ø§Ù… Ø§Ù„Ø´Ø±Ø§Ø¡"}
                     </Link>
                     <Link
                       to={process.env.PUBLIC_URL + "/shop"}
                       className="cart-mobile-continue">
-                      {strings["CART_CONTINUE_SHOPPING"] || "متابعة التسوق"}
+                      {strings["CART_CONTINUE_SHOPPING"] || "Ù…ØªØ§Ø¨Ø¹Ø© Ø§Ù„ØªØ³ÙˆÙ‚"}
                     </Link>
                   </div>
                 </div>
 
-                {/* ── DESKTOP grand total ── */}
+                {/* â”€â”€ DESKTOP grand total â”€â”€ */}
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="cart-shiping-update-wrapper">
@@ -304,7 +304,7 @@ const Cart = ({
   );
 };
 
-// ─── Redux ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Redux â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const mapStateToProps = (state) => ({
   cartItems: state.cartData,
   currency: state.currencyData,
@@ -323,19 +323,19 @@ export default connect(
   mapDispatchToProps,
 )(multilanguage(Cart));
 
-// ─────────────────────────────────────────────────────────────────────────────
-// ✅ useQty — hook مشترك
-// qty بتيجي من Redux (cartItem.pivot?.qty || cartItem.qty)
-// مش من useState محلي — ده بيضمن إن Desktop وMobile دايماً
-// شايفين نفس الرقم لأنهم بيقروا من نفس المصدر (Redux store)
-// ─────────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// âœ… useQty â€” hook Ù…Ø´ØªØ±Ùƒ
+// qty Ø¨ØªÙŠØ¬ÙŠ Ù…Ù† Redux (cartItem.pivot?.qty || cartItem.qty)
+// Ù…Ø´ Ù…Ù† useState Ù…Ø­Ù„ÙŠ â€” Ø¯Ù‡ Ø¨ÙŠØ¶Ù…Ù† Ø¥Ù† Desktop ÙˆMobile Ø¯Ø§ÙŠÙ…Ø§Ù‹
+// Ø´Ø§ÙŠÙÙŠÙ† Ù†ÙØ³ Ø§Ù„Ø±Ù‚Ù… Ù„Ø£Ù†Ù‡Ù… Ø¨ÙŠÙ‚Ø±ÙˆØ§ Ù…Ù† Ù†ÙØ³ Ø§Ù„Ù…ØµØ¯Ø± (Redux store)
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const useQty = (cartItem) => {
   const { addToast } = useToasts();
   const dispatch = useDispatch();
 
-  // ✅ القيمة بتيجي من الـ Redux store مش من state محلي
-  // لما الـ reducer يحدّث cartItem.pivot.qty أو cartItem.qty
-  // الكومبوننت بيـre-render تلقائياً بالقيمة الجديدة في الاتنين
+  // âœ… Ø§Ù„Ù‚ÙŠÙ…Ø© Ø¨ØªÙŠØ¬ÙŠ Ù…Ù† Ø§Ù„Ù€ Redux store Ù…Ø´ Ù…Ù† state Ù…Ø­Ù„ÙŠ
+  // Ù„Ù…Ø§ Ø§Ù„Ù€ reducer ÙŠØ­Ø¯Ù‘Ø« cartItem.pivot.qty Ø£Ùˆ cartItem.qty
+  // Ø§Ù„ÙƒÙˆÙ…Ø¨ÙˆÙ†Ù†Øª Ø¨ÙŠÙ€re-render ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ø¨Ø§Ù„Ù‚ÙŠÙ…Ø© Ø§Ù„Ø¬Ø¯ÙŠØ¯Ø© ÙÙŠ Ø§Ù„Ø§ØªÙ†ÙŠÙ†
   const qty = cartItem.pivot?.qty ?? cartItem?.qty ?? 1;
 
   const finalPrice =
@@ -367,7 +367,7 @@ const useQty = (cartItem) => {
   };
 };
 
-// ─── Desktop Row ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Desktop Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DesktopRow = ({ cartItem, currentLanguageCode }) => {
   const { qty, itemTotalPrice, handleIncrease, handleDecrease, handleDelete } =
     useQty(cartItem);
@@ -387,7 +387,7 @@ const DesktopRow = ({ cartItem, currentLanguageCode }) => {
             alt={cartItem.name}
             width={110}
             height={140}
-           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+           onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
         </Link>
       </td>
 
@@ -447,7 +447,7 @@ const DesktopRow = ({ cartItem, currentLanguageCode }) => {
   );
 };
 
-// ─── Mobile Card ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Mobile Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const MobileCard = ({ cartItem, currentLanguageCode, currency }) => {
   const { qty, itemTotalPrice, handleIncrease, handleDecrease, handleDelete } =
     useQty(cartItem);
@@ -461,7 +461,7 @@ const MobileCard = ({ cartItem, currentLanguageCode, currency }) => {
   const imageEl = (
     <div className="cart-mobile-card__image">
       <Link to={process.env.PUBLIC_URL + "/product/" + cartItem.slug}>
-        <img src={cartItem.image_path} alt={cartItem.name}  onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+        <img src={cartItem.image_path} alt={cartItem.name}  onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
       </Link>
     </div>
   );
@@ -469,15 +469,15 @@ const MobileCard = ({ cartItem, currentLanguageCode, currency }) => {
   const priceEl = (
     <div className="cart-mobile-card__left">
       <span className="cart-mobile-card__price">
-        {itemTotalPrice.toFixed(2)} {isAr ? "ج.م" : "L.E"}
+        {itemTotalPrice.toFixed(2)} {isAr ? "Ø¬.Ù…" : "L.E"}
       </span>
     </div>
   );
 
   return (
     <div className="cart-mobile-card" dir={isAr ? "rtl" : "ltr"}>
-      {/* عربي:    [السعر] [المحتوى] [الصورة]  ← يمين لشمال */}
-      {/* إنجليزي: [الصورة] [المحتوى] [السعر]  ← شمال ليمين */}
+      {/* Ø¹Ø±Ø¨ÙŠ:    [Ø§Ù„Ø³Ø¹Ø±] [Ø§Ù„Ù…Ø­ØªÙˆÙ‰] [Ø§Ù„ØµÙˆØ±Ø©]  â† ÙŠÙ…ÙŠÙ† Ù„Ø´Ù…Ø§Ù„ */}
+      {/* Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ: [Ø§Ù„ØµÙˆØ±Ø©] [Ø§Ù„Ù…Ø­ØªÙˆÙ‰] [Ø§Ù„Ø³Ø¹Ø±]  â† Ø´Ù…Ø§Ù„ Ù„ÙŠÙ…ÙŠÙ† */}
       {isAr ? priceEl : imageEl}
 
       <div className="cart-mobile-card__center">
@@ -494,7 +494,7 @@ const MobileCard = ({ cartItem, currentLanguageCode, currency }) => {
           {cartItem.addition && <span>Addition: {cartItem.addition}</span>}
           {cartItem.type && (
             <span>
-              {isAr ? "نوع" : "Type"}:{" "}
+              {isAr ? "Ù†ÙˆØ¹" : "Type"}:{" "}
               {isAr
                 ? cartItem.category.translations[0].name
                 : cartItem.category.translations[1].name}
@@ -519,7 +519,7 @@ const MobileCard = ({ cartItem, currentLanguageCode, currency }) => {
             className="cart-mobile-card__qty-btn"
             onClick={handleDecrease}
             disabled={qty <= 1}>
-            −
+            âˆ’
           </button>
         </div>
 

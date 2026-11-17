@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 import { multilanguage } from "redux-multilanguage";
@@ -26,21 +26,21 @@ const ProductDescriptionInfo = ({
   const { addToast } = useToasts();
   const [modalShow, setModalShow] = useState(false);
 
-  // --- دالة الترجمة الفورية للأوزان ---
+  // --- Ø¯Ø§Ù„Ø© Ø§Ù„ØªØ±Ø¬Ù…Ø© Ø§Ù„ÙÙˆØ±ÙŠØ© Ù„Ù„Ø£ÙˆØ²Ø§Ù† ---
   const formatDisplayWeight = (weightStr) => {
     if (!weightStr) return '';
-    if (currentLanguageCode === 'ar') return weightStr; // لو عربي، اعرضه زي ما هو من الداتا بيز
+    if (currentLanguageCode === 'ar') return weightStr; // Ù„Ùˆ Ø¹Ø±Ø¨ÙŠØŒ Ø§Ø¹Ø±Ø¶Ù‡ Ø²ÙŠ Ù…Ø§ Ù‡Ùˆ Ù…Ù† Ø§Ù„Ø¯Ø§ØªØ§ Ø¨ÙŠØ²
 
-    // لو إنجليزي، ترجم الكلمات لـ إنجليزي
+    // Ù„Ùˆ Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØŒ ØªØ±Ø¬Ù… Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ù„Ù€ Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠ
     return weightStr
       .toString()
-      .replace(/كجم/g, 'kg')
-      .replace(/كيلو/g, 'kg')
-      .replace(/جم/g, 'gm')
-      .replace(/جرام/g, 'gm');
+      .replace(/ÙƒØ¬Ù…/g, 'kg')
+      .replace(/ÙƒÙŠÙ„Ùˆ/g, 'kg')
+      .replace(/Ø¬Ù…/g, 'gm')
+      .replace(/Ø¬Ø±Ø§Ù…/g, 'gm');
   };
 
-  // --- معالجة الأوزان الديناميكية ---
+  // --- Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ø£ÙˆØ²Ø§Ù† Ø§Ù„Ø¯ÙŠÙ†Ø§Ù…ÙŠÙƒÙŠØ© ---
   let parsedVariations = [];
   try {
     if (product?.variations) {
@@ -50,17 +50,17 @@ const ProductDescriptionInfo = ({
     console.error("Error parsing variations:", error);
   }
 
-  // تعيين الوزن الافتراضي (أول وزن في القائمة لو موجود)
+  // ØªØ¹ÙŠÙŠÙ† Ø§Ù„ÙˆØ²Ù† Ø§Ù„Ø§ÙØªØ±Ø§Ø¶ÙŠ (Ø£ÙˆÙ„ ÙˆØ²Ù† ÙÙŠ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ù„Ùˆ Ù…ÙˆØ¬ÙˆØ¯)
   const [selectedVariation, setSelectedVariation] = useState(
     parsedVariations.length > 0 ? parsedVariations[0] : null
   );
 
-  // حساب السعر والوزن المعروض حالياً بناءً على اختيار العميل
+  // Ø­Ø³Ø§Ø¨ Ø§Ù„Ø³Ø¹Ø± ÙˆØ§Ù„ÙˆØ²Ù† Ø§Ù„Ù…Ø¹Ø±ÙˆØ¶ Ø­Ø§Ù„ÙŠØ§Ù‹ Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„Ø¹Ù…ÙŠÙ„
   const currentBasePrice = selectedVariation ? parseFloat(selectedVariation.price) : parseFloat(product?.price || 0);
   const currentDiscountPrice = product?.discount > 0 ? currentBasePrice - (currentBasePrice * product?.discount) / 100 : currentBasePrice;
   const currentWeight = selectedVariation ? selectedVariation.weight : (currentLanguageCode === "ar" ? product.translations[0]?.weight : product.translations[1]?.weight);
 
-  // تجهيز المنتج بكل بيانات الوزن الجديد عشان يتبعت للسلة صح (بياخد الوزن الأصلي من غير ترجمة عشان الباك إند)
+  // ØªØ¬Ù‡ÙŠØ² Ø§Ù„Ù…Ù†ØªØ¬ Ø¨ÙƒÙ„ Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„ÙˆØ²Ù† Ø§Ù„Ø¬Ø¯ÙŠØ¯ Ø¹Ø´Ø§Ù† ÙŠØªØ¨Ø¹Øª Ù„Ù„Ø³Ù„Ø© ØµØ­ (Ø¨ÙŠØ§Ø®Ø¯ Ø§Ù„ÙˆØ²Ù† Ø§Ù„Ø£ØµÙ„ÙŠ Ù…Ù† ØºÙŠØ± ØªØ±Ø¬Ù…Ø© Ø¹Ø´Ø§Ù† Ø§Ù„Ø¨Ø§Ùƒ Ø¥Ù†Ø¯)
   const productForCart = {
     ...product,
     price: currentBasePrice,
@@ -107,7 +107,7 @@ const ProductDescriptionInfo = ({
             : product.translations[1].name}
         </h2>
         
-        {/* عرض السعر المتغير */}
+        {/* Ø¹Ø±Ø¶ Ø§Ù„Ø³Ø¹Ø± Ø§Ù„Ù…ØªØºÙŠØ± */}
         <div className="product-details-price">
           {product?.discount > 0 ? (
             <>
@@ -126,16 +126,16 @@ const ProductDescriptionInfo = ({
           )}
         </div>
 
-        {/* عرض تابات اختيار الوزن */}
+        {/* Ø¹Ø±Ø¶ ØªØ§Ø¨Ø§Øª Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„ÙˆØ²Ù† */}
         {parsedVariations.length > 0 && (
           <div className="pro-details-size-color" style={{ marginBottom: "25px" }}>
             <div className="pro-details-size">
-              {/* عنوان يظهر الوزن المختار حالياً مترجم */}
+              {/* Ø¹Ù†ÙˆØ§Ù† ÙŠØ¸Ù‡Ø± Ø§Ù„ÙˆØ²Ù† Ø§Ù„Ù…Ø®ØªØ§Ø± Ø­Ø§Ù„ÙŠØ§Ù‹ Ù…ØªØ±Ø¬Ù… */}
               <span style={{ fontWeight: "bold", display: "block", marginBottom: "15px", color: "#333", fontSize: "16px" }}>
-                {currentLanguageCode === "ar" ? "الوزن:" : "Weight:"} {formatDisplayWeight(selectedVariation?.weight || '')}
+                {currentLanguageCode === "ar" ? "Ø§Ù„ÙˆØ²Ù†:" : "Weight:"} {formatDisplayWeight(selectedVariation?.weight || '')}
               </span>
               
-              {/* حاوية التابات */}
+              {/* Ø­Ø§ÙˆÙŠØ© Ø§Ù„ØªØ§Ø¨Ø§Øª */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", direction: currentLanguageCode === "en" ? "ltr" : "rtl" }}>
                 {parsedVariations.map((varItem, index) => {
                   const isSelected = selectedVariation?.weight === varItem.weight;
@@ -157,10 +157,10 @@ const ProductDescriptionInfo = ({
                         transition: "all 0.3s ease",
                         outline: "none",
                         fontSize: "14px",
-                        direction: "ltr" // لضمان ظهور الأرقام صحيحة بجانب الحروف
+                        direction: "ltr" // Ù„Ø¶Ù…Ø§Ù† Ø¸Ù‡ÙˆØ± Ø§Ù„Ø£Ø±Ù‚Ø§Ù… ØµØ­ÙŠØ­Ø© Ø¨Ø¬Ø§Ù†Ø¨ Ø§Ù„Ø­Ø±ÙˆÙ
                       }}
                     >
-                      {/* عرض الكلمة مترجمة جوه الزرار */}
+                      {/* Ø¹Ø±Ø¶ Ø§Ù„ÙƒÙ„Ù…Ø© Ù…ØªØ±Ø¬Ù…Ø© Ø¬ÙˆÙ‡ Ø§Ù„Ø²Ø±Ø§Ø± */}
                       {formatDisplayWeight(varItem.weight)}
                     </button>
                   );
@@ -187,7 +187,7 @@ const ProductDescriptionInfo = ({
                 alt={currentLanguageCode === "ar" ? icon?.translations[0].name : icon?.translations[1].name}
                 className="img-fluid mb-2"
                 style={{ width: "50px", height: "50px", objectFit: "contain" }}
-                onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }}
+                onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }}
               />
               <p>
                 {currentLanguageCode === "ar"
@@ -266,7 +266,7 @@ const ProductDescriptionInfo = ({
             loading="lazy"
             decoding="async"
             style={{ marginBlock: "50px", width: "100%" }}
-           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+           onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
         )}
       </div>
       

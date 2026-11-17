@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 
@@ -77,12 +77,12 @@ const ProductImageFixed = ({ product }) => {
                 marginBlock: "50px",
                 width: "100%",
               }}
-             onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+             onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
           )}
         </div>
       </div>
       
-      {/* التعديل السحري: إخفاء الغلاف لو مش مرفوع في الباك إند للشاشات الكبيرة */}
+      {/* Ø§Ù„ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø³Ø­Ø±ÙŠ: Ø¥Ø®ÙØ§Ø¡ Ø§Ù„ØºÙ„Ø§Ù Ù„Ùˆ Ù…Ø´ Ù…Ø±ÙÙˆØ¹ ÙÙŠ Ø§Ù„Ø¨Ø§Ùƒ Ø¥Ù†Ø¯ Ù„Ù„Ø´Ø§Ø´Ø§Øª Ø§Ù„ÙƒØ¨ÙŠØ±Ø© */}
       {!isMobileOrTablet && product?.cover_path && !product.cover_path.endsWith('/images/') && (
         <img
         src={product?.cover_path}
@@ -93,7 +93,7 @@ const ProductImageFixed = ({ product }) => {
           width: "100%",
         }}
         onError={(e) => {
-          e.target.style.display = 'none'; // السطر ده بيخفي الصورة فوراً لو الرابط بايظ أو مفيش صورة
+          e.target.style.display = 'none'; // Ø§Ù„Ø³Ø·Ø± Ø¯Ù‡ Ø¨ÙŠØ®ÙÙŠ Ø§Ù„ØµÙˆØ±Ø© ÙÙˆØ±Ø§Ù‹ Ù„Ùˆ Ø§Ù„Ø±Ø§Ø¨Ø· Ø¨Ø§ÙŠØ¸ Ø£Ùˆ Ù…ÙÙŠØ´ ØµÙˆØ±Ø©
         }}
       />
     )}

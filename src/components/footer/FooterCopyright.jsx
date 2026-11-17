@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
@@ -31,11 +31,11 @@ const FooterCopyright = ({
               height: "100%",
               maxWidth: "150px",
             }}
-           onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+           onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
         </Link>
       </div>
       {/* <p>
-        © 2025{" "}
+        Â© 2025{" "}
         <a href="/" rel="noopener noreferrer" target="_blank">
           {strings["elmoda"]}
         </a>

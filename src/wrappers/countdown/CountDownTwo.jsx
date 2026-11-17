@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+﻿import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import Countdown from "react-countdown-now";
 import { Link } from "react-router-dom";
@@ -73,7 +73,7 @@ const CountDownTwo = ({ spaceTopClass, spaceBottomClass, strings }) => {
                     src={`https://admin.alfa-milk.com/images/${offer?.image}`}
                     alt="deal of day"
                     loading="lazy"
-                   onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }} />
+                   onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }} />
                 </Link>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/api.js";
 import { multilanguage } from "redux-multilanguage";
 
@@ -32,7 +32,7 @@ function Icons({ currentLanguageCode }) {
                       }
                       className=" mb-2"
                       style={{ width: "50px", height: "50px" }}
-                      onError={(e) => { e.target.onerror = null; e.target.src = "/deal.png"; }}
+                      onError={(e) => { if (window.handleImageError) window.handleImageError(e); else { e.target.onerror = null; e.target.src = "/deal.png"; } }} onLoad={(e) => { if (window.handleImageSuccess) window.handleImageSuccess(e); }}
                     />
                     <p style={{ marginTop: "10px", fontSize: "14px" }}>
                       {currentLanguageCode === "ar"
