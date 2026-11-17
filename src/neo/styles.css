@@ -136,7 +136,9 @@ h1, h2, h3, h4, h5, h6 { color: var(--ng-secondary); letter-spacing: -0.02em; }
 
 /* Layout Grids */
 .ng-panel-grid, .ng-category-grid, .ng-product-grid, .ng-blog-grid, .ng-icon-stack, .ng-contact-grid,
-.ng-cart-grid, .ng-account-layout, .ng-checkout-grid, .ng-reviews-grid, .ng-product-layout { display: grid; gap: 32px; }
+.ng-cart-grid { display: grid; gap: 32px; grid-template-columns: 1.5fr 1fr; }
+.ng-account-layout, .ng-checkout-grid, .ng-product-layout { display: grid; gap: 32px; grid-template-columns: 1fr 1fr; }
+.ng-reviews-grid { display: grid; gap: 32px; }
 .ng-metrics-layout { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .ng-metric-card { padding: 32px; display: flex; flex-direction: column; gap: 12px; }
 .ng-metric-card span { color: var(--ng-text-soft); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -387,7 +389,7 @@ textarea { resize: vertical; min-height: 120px; }
 @media (max-width: 1024px) {
   .ng-hero-grid { grid-template-columns: 1fr; min-height: auto; }
   .ng-footer-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
-  .ng-product-layout, .ng-cart-layout, .ng-checkout-grid, .ng-account-layout { grid-template-columns: 1fr; }
+  .ng-product-layout, .ng-cart-layout, .ng-checkout-grid, .ng-account-layout, .ng-cart-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
   .ng-navtools { display: none; }
@@ -425,6 +427,122 @@ textarea { resize: vertical; min-height: 120px; }
   .ng-product-hero-image img { height: 400px; padding: 20px; }
   .ng-footer-grid { grid-template-columns: 1fr; gap: 40px; }
   .ng-footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+
+  /* ===== Cart Line - Mobile Fix ===== */
+  .ng-cart-line {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 16px;
+    gap: 12px;
+    align-items: center;
+  }
+  .ng-cart-line img {
+    width: 72px;
+    height: 72px;
+    border-radius: 14px;
+    flex-shrink: 0;
+  }
+  .ng-cart-line > div:first-of-type {
+    flex: 1;
+    min-width: 0;
+  }
+  .ng-cart-line > div:first-of-type strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .ng-cart-line > div:first-of-type span {
+    font-size: 12px;
+    color: var(--ng-text-soft);
+  }
+  .ng-cart-line .ng-qty-box {
+    order: 4;
+    flex-shrink: 0;
+  }
+  .ng-cart-line > strong {
+    order: 5;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .ng-cart-line > button.ng-text-button {
+    order: 6;
+    flex-shrink: 0;
+    padding: 4px 8px;
+  }
+
+  /* ===== Cart Grid - Stack on Mobile ===== */
+  .ng-cart-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ===== Summary Card - Mobile Fix ===== */
+  .ng-summary-card {
+    padding: 24px;
+    position: static;
+  }
+  .ng-summary-card h3 {
+    font-size: 22px;
+  }
+  .ng-summary-row {
+    font-size: 15px;
+    gap: 8px;
+  }
+  .ng-summary-row strong {
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  /* ===== Reviews Grid - Stack on Mobile ===== */
+  .ng-reviews-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+  .ng-review-form {
+    padding: 24px;
+    order: -1;
+  }
+  .ng-review-form h3 {
+    font-size: 20px;
+  }
+  .ng-review-form .ng-primary-button {
+    width: 100%;
+  }
+
+  /* ===== Product Spec Grid - Mobile Fix ===== */
+  .ng-spec-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .ng-spec-grid > div {
+    padding: 14px;
+    border-radius: 14px;
+    text-align: center;
+  }
+  .ng-spec-grid span {
+    font-size: 11px;
+  }
+  .ng-spec-grid strong {
+    font-size: 14px;
+  }
+
+  /* ===== Qty Box - Mobile Fix ===== */
+  .ng-qty-box {
+    padding: 4px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+  .ng-qty-box button {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  .ng-qty-box span {
+    min-width: 20px;
+    text-align: center;
+    font-size: 14px;
+  }
 }
 
 /* Loading Shell */
